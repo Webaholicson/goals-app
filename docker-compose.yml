@@ -1,0 +1,10 @@
+version: '2'
+services:
+  nginx_goals:
+    container_name: nginx_goals
+    image: nginx:1.10.1
+    volumes:
+      - ./:/usr/share/nginx/html
+    ports:
+      - "8080:80"
+    mem_limit: 16m
