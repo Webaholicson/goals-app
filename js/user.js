@@ -6,7 +6,7 @@ UserModule.controller('LoginController', ['$scope', 'firebase',
 
     $scope.data = {};
 
-    $scope.loginResult = '';
+    $scope.loginClass = '';
 
     $scope.loginMsg = '';
 
@@ -23,20 +23,17 @@ UserModule.controller('LoginController', ['$scope', 'firebase',
 
       var btn = angular.element(event.target).button('loading');
 
-      var user = firebase.auth().signInWithEmailAndPassword(
+      firebase.auth().signInWithEmailAndPassword(
         $scope.data['email'],
         $scope.data['password']
-      );
-
-      console.log(user);
-
-      user.then(function(value) {
+      ).then(function(value) {
         $scope.user = angular.copy($scope.data);
         $scope.reset();
       }, function(reason) {
-        $scope.loginResult  = 'alert-danger';
+        $scope.loginClass  = 'alert-danger';
         $scope.loginMsg     = reason.message;
         $scope.displayMsg   = true;
+        $scope.$apply();
         btn.button('reset');
       });
     };

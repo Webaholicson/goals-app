@@ -1,219 +1,238 @@
 <!doctype html>
 <html lang="en-US" ng-app="GoalsApp">
-  <head>
-    <title>Goals</title>
+	<head>
+		<title>Goals</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="author" content="Antonio Mendes">
-    <meta name="description" content="Small goal tracking app">
-    <meta name="viewport" content="width=device-width">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="author" content="Antonio Mendes">
+		<meta name="description" content="Small goal tracking app">
+		<meta name="viewport" content="width=device-width">
 
-    <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/firebase.js"></script>
-    <script type="text/javascript" src="js/highcharts.js"></script>
-    <script type="text/javascript" src="js/gray.js"></script>
+		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/firebase.js"></script>
+		<script type="text/javascript" src="js/highcharts.js"></script>
+		<script type="text/javascript" src="js/gray.js"></script>
 
-    <script type="text/javascript" src="js/app.js"></script>
-    <script type="text/javascript" src="js/user.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/user.js"></script>
 
-    <link rel="stylesheet" media="all" href="css/highcharts.css" />
-    <link rel="stylesheet" media="all" href="css/bootstrap.css" />
-    <link rel="stylesheet" media="all" href="css/bootstrap-theme.min.css" />
-    <link rel="stylesheet" media="all" href="css/styles.css" />
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/ >
-  </head>
-  <body>
-    <div class="wrapper container-fluid">
-      <header id="main-header" class="row">
-        <div class="container-fluid">
-          <div class="col-xs-9">
-            <h4>
-              <span class="navbar-brand-icon glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-              Goal Tracker
-            </h4>
-          </div>
-          <div id="notifications-box" class="col-xs-3 text-right">
-            <a href="#" id="notifications-btn" class="text-center glyphicon glyphicon-bell">
-            </a>
-          </div>
-        </div>
-      </header>
-      <nav id="main-nav" class="row">
-        <div class="col-xs-2 nav-item text-center">
-          <div class="row panel-body selected">
-              <span class="glyphicon glyphicon-home"></span>
-          </div>
-        </div>
-        <div class="col-xs-2 nav-item text-center">
-          <div class="row panel-body">
-            <span class="glyphicon glyphicon-plus"></span>
-          </div>
-        </div>
-        <div class="col-xs-2 nav-item text-center">
-          <div class="row panel-body">
-            <span class="glyphicon glyphicon-signal"></span>
-          </div>
-        </div>
-        <div class="col-xs-2 nav-item text-center">
-          <div class="row panel-body">
-            <span class="glyphicon glyphicon-wrench"></span>
-          </div>
-        </div>
-        <div class="col-xs-2 nav-item text-center">
-          <div class="row panel-body">
-            <span class="glyphicon glyphicon-user"></span>
-          </div>
-        </div>
-        <div class="col-xs-2 nav-item text-center">
-          <div class="row panel-body">
-            <span class="glyphicon glyphicon-lock"></span>
-          </div>
-        </div>
-      </nav>
+		<link rel="stylesheet" media="all" href="css/highcharts.css" />
+		<link rel="stylesheet" media="all" href="css/bootstrap.css" />
+		<link rel="stylesheet" media="all" href="css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" media="all" href="css/styles.css" />
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/ >
+	</head>
+	<body>
+    	<div class="wrapper container-fluid">
+			<header id="main-header" class="row">
+		        <div class="container-fluid">
+		          <div class="col-xs-9">
+		            <h4>
+		              <span class="navbar-brand-icon glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+		              Goal Tracker
+		            </h4>
+		          </div>
+		          <div id="notifications-box" class="col-xs-3 text-right">
+		            <a href="#" id="notifications-btn" class="text-center glyphicon glyphicon-bell">
+		            </a>
+		          </div>
+		        </div>
+			</header>
+			
+			<nav id="main-nav" class="row">
+		        <div class="col-xs-2 nav-item text-center">
+				<div class="row panel-body selected">
+					<span class="glyphicon glyphicon-home"></span>
+				</div>
+		        </div>
+		        <div class="col-xs-2 nav-item text-center">
+		        	<div class="row panel-body">
+		            	<span class="glyphicon glyphicon-plus"></span>
+		        	</div>
+		        </div>
+		        <div class="col-xs-2 nav-item text-center">
+		        	<div class="row panel-body">
+		    			<span class="glyphicon glyphicon-signal"></span>
+		        	</div>
+		        </div>
+		        <div class="col-xs-2 nav-item text-center">
+		        	<div class="row panel-body">
+		        		<span class="glyphicon glyphicon-wrench"></span>
+		        	</div>
+		        </div>
+		        <div class="col-xs-2 nav-item text-center">
+		        	<div class="row panel-body">
+		            	<span class="glyphicon glyphicon-user"></span>
+		        	</div>
+		        </div>
+		        <div class="col-xs-2 nav-item text-center">
+		    		<div class="row panel-body">
+		        		<span class="glyphicon glyphicon-lock"></span>
+		    		</div>
+		        </div>
+			</nav>
 
-      <section id="notifications" class="container-fluid">
-        <div class="row card">
-          <h4><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Notifications</h4>
-          <hr />
-          <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <strong>Warning!</strong> Better check yourself, you're not looking too good.
-          </div>
-        </div>
-      </section>
+			<section id="notifications" class="container-fluid">
+				<div class="row card">
+					<h4><span class="glyphicon glyphicon-bell" aria-hidden="true"></span> Notifications</h4>
+					<hr />
+					<div class="alert alert-warning alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>Warning!</strong> Better check yourself, you're not looking too good.
+					</div>
+				</div>
+			</section>
 
-      <main id="content" class="container-fluid">
-        <div id="login" class="row">
-          <form name="login_form" class="col-xs-12 card" ng-controller="LoginController">
-            <h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login</h4>
-            <hr/>
-            <div class="form-group" ng-class="{'has-error': loginAttempted && (login_form.email.$error.email || login_form.email.$error.required)}">
-              <input type="email" class="form-control" ng-required="true" name="email" ng-model="data.email" placeholder="Email">
-            </div>
-            <div class="form-group" ng-class="{'has-error': loginAttempted && login_form.password.$error.required}">
-              <input type="password" ng-required="true" name="password" class="form-control" ng-model="data.password" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <button name="sbmt" type="submit" data-loading-text="Authenticating..." class="btn btn-default" ng-click="authenticate(login_form, $event)">Submit</button>
-            </div>
-          </form>
-          <div ng-class="loginResult" ng-show="displayMsg" class="alert" role="alert">test</div>
-        </div>
+		  	<main id="content" class="container-fluid">
+        		<div id="login" class="row page active" ng-controller="LoginController">
+	          		<form name="login_form" class="col-xs-12 card">
+			            <h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login</h4>
+			            <hr/>
+			            <div class="form-group" ng-class="{'has-error': loginAttempted && (login_form.email.$error.email || login_form.email.$error.required)}">
+			            	<input type="email" class="form-control" ng-required="true" name="email" ng-model="data.email" placeholder="Email">
+			            </div>
+			            <div class="form-group" ng-class="{'has-error': loginAttempted && login_form.password.$error.required}">
+			            	<input type="password" ng-required="true" name="password" class="form-control" ng-model="data.password" placeholder="Password">
+			            </div>
+			            <div class="form-group">
+			            	<button name="sbmt" type="submit" data-loading-text="Authenticating..." class="btn btn-default" ng-click="authenticate(login_form, $event)">Submit</button>
+			            </div>
+			            <div ng-class="loginClass" ng-show="displayMsg" ng-bind="loginMsg" class="alert" role="alert"></div>
+						<div class="form-group text-center">
+							<p><a ng-click="$goto('register')">Register</a></p>
+			            	<p><a ng-click="$goto('forgot_password')">Forgot password?</a></p>
+			            </div>
+					</form>
+	  			</div>
+		
+				<div id="forgot_password" class="page row" ng-controller="ForgotPasswordController">
+					<form name="login_form" class="col-xs-12 card">
+			            <h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Forgot Password</h4>
+			            <hr/>
+			            <div class="form-group" ng-class="{'has-error': loginAttempted && (login_form.email.$error.email || login_form.email.$error.required)}">
+			          		<input type="email" class="form-control" ng-required="true" name="email" ng-model="data.email" placeholder="Email">
+			            </div>
+			            <div class="form-group">
+			          		<button name="sbmt" type="submit" data-loading-text="Authenticating..." class="btn btn-default" ng-click="reset_password(login_form, $event)">Submit</button>
+			            </div>
+			            <div ng-class="loginClass" ng-show="displayMsg" ng-bind="loginMsg" class="alert" role="alert"></div>
+		      		</form>
+		    	</div>
+			
+		        <div id="register" class="page row" ng-controller="RegisterController">
+		      		<form name="register_form" class="col-xs-12 card">
+			        	<h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register<h4>
+			            <hr/>
+			            <div class="form-group">
+			          		<input type="text" class="form-control" ng-model="data.first_name" placeholder="First Name">
+			            </div>
+			            <div class="form-group">
+			          		<input type="text" class="form-control" ng-model="data.last_name" placeholder="Last Name">
+			            </div>
+			            <div class="form-group">
+							<input type="email" class="form-control" ng-model="data.email" placeholder="Email">
+			            </div>
+			            <div class="form-group">
+			          		<input type="password" class="form-control" ng-model="data.password" placeholder="Password">
+			            </div>
+			            <button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
+		          </form>
+		        </div>
 
-        <div id="register" class="row">
-          <form name="register_form" class="col-xs-12 card" ng-controller="RegisterController">
-            <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register<h4>
-            <hr/>
-            <div class="form-group">
-              <input type="text" class="form-control" ng-model="data.first_name" placeholder="First Name">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" ng-model="data.last_name" placeholder="Last Name">
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" ng-model="data.email" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" ng-model="data.password" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
-          </form>
-        </div>
+		        <div id="new-goal" class="page row">
+		      		<form action="/goals/new" class="col-xs-12 card">
+		            <h4><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Goal<h4>
+		            <hr/>
+		            <div class="form-group">
+		          		<input type="text" class="form-control" id="label" name="goal_label" placeholder="Label">
+		            </div>
+		            <div class="form-group">
+		          		<textarea type="text" class="form-control" id="description" name="goal_description">Description...</textarea>
+		            </div>
 
-        <div id="new-goal" class="row">
-          <form action="/goals/new" class="col-xs-12 card">
-            <h4><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Goal<h4>
-            <hr/>
-            <div class="form-group">
-              <input type="text" class="form-control" id="label" name="goal_label" placeholder="Label">
-            </div>
-            <div class="form-group">
-              <textarea type="text" class="form-control" id="description" name="goal_description">Description...</textarea>
-            </div>
+		            <h5>Schedule</h5>
+		            <hr />
+		            <div id="schedule-box">
+		          		<div class="form-group">
+			                Schedule this goal <span class="schedule-box-selector">...</span>
+			                <select name="main_interval">
+			              		<option value="every">every</option>
+			              		<option value="for">for</option>
+			                </select>
+			                <select name="date_part_every">
+			              		<option value="n-value">X</option>
+			              		<option value="day">day</option>
+			              		<option value="hour">hour</option>
+			                </select>
+			                <select name="date_part_for">
+			              		<option value="n-value">X</option>
+			              		<option value="weekdays">these weekdays</option>
+			              		<option value="weekdays">these hours</option>
+			                </select>
+			                <select name="date_part_nvalue">
+			              		<option value="day">day(s)</option>
+			              		<option value="hour">hour(s)</option>
+			                </select>
+			                <input type="text" name="start_date" placeholder="start date">
+			                <select name="modifiers">
+								<option value="and">and</option>
+								<option value="unless">unless</option>
+								<option value="until">until</option>
+			                </select>
+			                <input type="text" name="start_date" placeholder="end date">
+		          		</div>
+		            </div>
+		            <button type="submit" class="btn btn-default">Save</button>
+		          </form>
+		        </div>
 
-            <h5>Schedule</h5>
-            <hr />
-            <div id="schedule-box">
-              <div class="form-group">
-                Schedule this goal <span class="schedule-box-selector">...</span>
-                <select name="main_interval">
-                  <option value="every">every</option>
-                  <option value="for">for</option>
-                </select>
-                <select name="date_part_every">
-                  <option value="n-value">X</option>
-                  <option value="day">day</option>
-                  <option value="hour">hour</option>
-                </select>
-                <select name="date_part_for">
-                  <option value="n-value">X</option>
-                  <option value="weekdays">these weekdays</option>
-                  <option value="weekdays">these hours</option>
-                </select>
-                <select name="date_part_nvalue">
-                  <option value="day">day(s)</option>
-                  <option value="hour">hour(s)</option>
-                </select>
-                <input type="text" name="start_date" placeholder="start date">
-                <select name="modifiers">
-                  <option value="and">and</option>
-                  <option value="unless">unless</option>
-                  <option value="until">until</option>
-                </select>
-                <input type="text" name="start_date" placeholder="end date">
-              </div>
-            </div>
-            <button type="submit" class="btn btn-default">Save</button>
-          </form>
-        </div>
+		        <div id="view-goal" class="page row">
+		      		<div class="col-xs-12 card">
+			            <h4><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Goal Title</h4>
+			            <hr />
+			            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+			              quis interdum enim. Curabitur a magna nec ipsum commodo ultrices.
+			              Nullam blandit justo eu ultricies laoreet.
+			            </p>
+			            <form method="post" action="/goals/view/1">
 
-        <div id="view-goal" class="row">
-          <div class="col-xs-12 card">
-            <h4><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Goal Title</h4>
-            <hr />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              quis interdum enim. Curabitur a magna nec ipsum commodo ultrices.
-              Nullam blandit justo eu ultricies laoreet.
-            </p>
-            <form method="post" action="/goals/view/1">
+			            </form>
+		      		</div>
+		    	</div>
 
-            </form>
-          </div>
-        </div>
+		        <div id="view-goal" class="page row">
+					<div class="col-xs-12 card">
+			            <h4><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Today's Goals</h4>
+			            <hr />
+			            <div class="goal-panel panel panel-primary">
+		              		<div class="goal-panel-heading panel-heading container-fluid">
+				                <div class="col-xs-10">Brush Teeth</div>
+				                <div class="col-xs-2 text-right">
+			              			<span class="options glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+				                </div>
+		              		</div>
+		              		<div class="panel-body">
+			                	Need to brush my teeth every morning.
+			              	</div>
+			              	<div class="panel-footer">
+			                	Status: <span class="label label-default">Pending</span>
+			              	</div>
+			            </div>
+			            <p class="text-center">
+		              		<img class="loading" alt="Loading..." src="images/loading.gif" />
+			            </p>
+					</div>
+		        </div>
+			</main>
 
-        <div id="view-goal" class="row">
-          <div class="col-xs-12 card">
-            <h4><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Today's Goals</h4>
-            <hr />
-            <div class="goal-panel panel panel-primary">
-              <div class="goal-panel-heading panel-heading container-fluid">
-                <div class="col-xs-10">Brush Teeth</div>
-                <div class="col-xs-2 text-right">
-                  <span class="options glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
-                </div>
-              </div>
-              <div class="panel-body">
-                Need to brush my teeth every morning.
-              </div>
-              <div class="panel-footer">
-                Status: <span class="label label-default">Pending</span>
-              </div>
-            </div>
-            <p class="text-center">
-              <img class="loading" alt="Loading..." src="images/loading.gif" />
-            </p>
-          </div>
-        </div>
-      </main>
-
-      <footer id="main-footer" class="row">
-        <p class="text-center">Goal Tracker v1.0.0</p>
-      </footer>
-    </div>
-  </body>
+			<footer id="main-footer" class="row">
+				<p class="text-center">Goal Tracker v1.0.0</p>
+			</footer>
+    	</div>
+	</body>
 </html>
