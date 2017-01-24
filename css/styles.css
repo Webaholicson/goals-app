@@ -1,7 +1,7 @@
 .wrapper {
 	max-width: 460px;
 	margin: 0 auto;
-	background-color: #fffbfa;
+	background-color: #f3f3f3;
 }
 
 .navbar-brand-icon {
@@ -14,7 +14,7 @@
 	color: #fff;
 	padding: 0;
 	margin-bottom: 20px;
-	padding-bottom: 10px;
+	position: relative;
 }
 
 #notifications p {
@@ -25,6 +25,7 @@
 	padding: 5px 0;
 	background-color: #ac2929;
 	color: #fff;
+	border-bottom: 2px solid #6d1313;
 }
 
 #new-goal-btn {
@@ -32,11 +33,23 @@
 	color: #ac2929;
 }
 
+.nav-container {
+	min-height: 51px;
+}
+
 .nav-item {
 	border-top: 1px solid #962b2b;
 	border-right: 1px solid #962b2b;
 	border-left: 1px solid #ae3838;
 	cursor: pointer;
+}
+
+#menu-item-state {
+	position: absolute;
+	display: none;
+	height: 5px;
+	background-color: #480101;
+	bottom: 0;
 }
 
 /* .nav-item .selected {
@@ -90,6 +103,34 @@
 	background-color: #ac2929;
 }
 
+#home-logo {
+	height: 100px;
+}
+
+#login {
+	width: 90%;
+	margin: 3.5em auto;
+}
+
+.hide {
+	display: none;
+}
+
+#login .card {
+	color: #fff;
+	border: 1px solid #060100;
+    box-shadow: 0px 2px 5px 0px #120703;
+    background-color: rgba(45, 11, 11, 0.72);
+}
+
+#login a {
+	color : #fff;
+}
+
+.home {
+	background: url('../images/bg.jpg') center top no-repeat #ac2929;
+}
+
 .loading { width:50%; height: 50%; }
 
 .goal-panel-heading { padding: 10px 0; }
@@ -99,6 +140,8 @@
 .page { display: none; }
 
 .page.active { display: block; }
+
+.slide { display: none; }
 
 @keyframes notify {
 	0% { transform: rotate(0deg); left: 0px; }

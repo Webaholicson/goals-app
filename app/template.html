@@ -1,0 +1,11 @@
+<div ng-class="{home: !$ctrl.isLoggedIn}" class="wrapper container-fluid">
+	<gt-header show-notification="$ctrl.isLoggedIn"></gt-header>
+
+	<gt-nav on-logout="$ctrl.logout()" ng-show="$ctrl.isLoggedIn"></gt-nav>
+
+	<main id="content" class="container-fluid">
+		<div ng-view></div>
+	</main>
+
+	<gt-footer></gt-footer>
+</div>

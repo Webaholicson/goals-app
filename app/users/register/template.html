@@ -1,0 +1,19 @@
+<div id="register" class="page row" ng-controller="RegisterController">
+	<form name="register_form" class="col-xs-12 card">
+		<h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register<h4>
+		<hr/>
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="data.first_name" placeholder="First Name">
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="data.last_name" placeholder="Last Name">
+		</div>
+		<div class="form-group">
+			<input type="email" class="form-control" ng-model="data.email" placeholder="Email">
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" ng-model="data.password" placeholder="Password">
+		</div>
+		<button type="submit" class="btn btn-default" ng-click="register()">Submit</button>
+  </form>
+</div>

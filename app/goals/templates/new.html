@@ -1,0 +1,46 @@
+<div id="new-goal" class="page row">
+	<form action="/goals/new" class="col-xs-12 card">
+	<h4><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Goal<h4>
+	<hr/>
+	<div class="form-group">
+		<input type="text" class="form-control" id="label" name="goal_label" placeholder="Label">
+	</div>
+	<div class="form-group">
+		<textarea type="text" class="form-control" id="description" name="goal_description">Description...</textarea>
+	</div>
+
+	<h5>Schedule</h5>
+	<hr />
+	<div id="schedule-box">
+		<div class="form-group">
+			Schedule this goal <span class="schedule-box-selector">...</span>
+			<select name="main_interval">
+				<option value="every">every</option>
+				<option value="for">for</option>
+			</select>
+			<select name="date_part_every">
+				<option value="n-value">X</option>
+				<option value="day">day</option>
+				<option value="hour">hour</option>
+			</select>
+			<select name="date_part_for">
+				<option value="n-value">X</option>
+				<option value="weekdays">these weekdays</option>
+				<option value="weekdays">these hours</option>
+			</select>
+			<select name="date_part_nvalue">
+				<option value="day">day(s)</option>
+				<option value="hour">hour(s)</option>
+			</select>
+			<input type="text" name="start_date" placeholder="start date">
+			<select name="modifiers">
+				<option value="and">and</option>
+				<option value="unless">unless</option>
+				<option value="until">until</option>
+			</select>
+			<input type="text" name="start_date" placeholder="end date">
+		</div>
+	</div>
+	<button type="submit" class="btn btn-default">Save</button>
+  </form>
+</div>
