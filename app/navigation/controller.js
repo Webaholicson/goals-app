@@ -4,31 +4,21 @@ define([], function() {
 	var Controller = function($scope, $user, $location) {
 		var ctrl = this;
 		
+		var itemSelector = '.nav-item';
+		
 		ctrl.onClick = function(navItem) {
 			navItem.events.onclick();
+			
 			angular.forEach(ctrl.items, function(item) {
 				item.isSelected = false;
 			});
-			navItem.isSelected = true;
-			ctrl.moveSelectedIndicator(navItem);
-		};
-		
-		ctrl.moveSelectedIndicator = function(navItem) {
-			var index = ctrl.items.indexOf(navItem);
-			var el = $('.nav-item').eq(index);
-			var outerWidth = el.outerWidth();
-			var innerWidth = el.innerWidth();
-			var left = Math.round(outerWidth) * index;
 			
 			if (navItem.name === 'logout') {
-				left = 0;
+				ctrl.items[0].isSelected = true;
+			} else {
+				navItem.isSelected = true;
 			}
-			
-			$('#menu-item-state').animate({ 
-				left: left.toString()+"px"
-				
-			});
-		}
+		};
 		
 		ctrl.items = [
 			{
@@ -41,12 +31,12 @@ define([], function() {
 				}
 			},
 			{
-				name: 'new_goal',
+				name: 'edit_goal',
 				icon: 'glyphicon-plus',
 				isSelected: false,
 				events: {
 					onclick: function() {
-						return $location.url('/goal/new')
+						return $location.url('/goal/edit')
 					}
 				}
 			},
@@ -56,7 +46,7 @@ define([], function() {
 				isSelected: false,
 				events: {
 					onclick: function() {
-						return $location.url('/goal/new')
+						return $location.url('/reports')
 					}
 				}
 			},
@@ -94,6 +84,12 @@ define([], function() {
 				}
 			},
 		];
+		
+		ctrl.$onInit = function() {
+			$(itemSelector).eq(0).css({
+				background: 'linear-gradient(#ac2929, #711414);'
+			})
+		}
 	};
 	
 	Controller.$inject = ['$scope', '$user', '$location'];

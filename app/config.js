@@ -17,6 +17,12 @@ define([], function(){
 			template: '<gt-forgot-password></gt-forgot-password>'
 		}).when('/dashboard', {
 			template: '<gt-dashboard></gt-dashboard>'
+		}).when('/goal/edit', {
+			template: '<gt-goal template="edit"></gt-goal>'
+		}).when('/goal/edit/:id', {
+			template: '<gt-goal template="edit"></gt-goal>'
+		}).when('/goal', {
+			template: '<gt-goal template="index"></gt-goal>'
 		});
 	}
 	

@@ -6,7 +6,8 @@ define([
 		'app/header/component', 'app/navigation/component',
 		'app/navigation/item/component',
 		'app/users/login/component', 'app/users/register/component',
-		'app/users/forgotpassword/component', 'app/card/component'
+		'app/users/forgotpassword/component', 'app/card/component',
+		'app/goal/component'
 	],
 	function(require, $, ng) {
 		'use strict';
@@ -24,6 +25,7 @@ define([
 		var gtNavItem = require('app/navigation/item/component');
 		var gtDashboard = require('app/dashboard/component');
 		var gtCard = require('app/card/component');
+		var gtGoal = require('app/goal/component');
 		
 		ng.module('GoalsApp', ['ngRoute', 'ngAnimate'])
 			.factory('$firebase', FirebaseSrvc)
@@ -38,6 +40,7 @@ define([
 			.component('gtForgotPassword', gtForgotPassword)
 			.component('gtDashboard', gtDashboard)
 			.component('gtCard', gtCard)
+			.component('gtGoal', gtGoal)
 			.config(Config);
 	}
 );

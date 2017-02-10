@@ -19,9 +19,25 @@ define([], function() {
 		ctrl.$onInit = function() {
 			this.addCards([
 				{
-					title: 'Goal Title',
+					title: 'Upcoming Goals',
 					icon: 'glyphicon-star',
-					description: 'Lorem ipsum dolor sit amet, consectetur \
+					content: 'Lorem ipsum dolor sit amet, consectetur \
+					adipiscing elit. Nulla quis interdum enim. Curabitur a \
+					magna nec ipsum commodo ultrices. Nullam blandit justo eu \
+					ultricies laoreet.'
+				},
+				{
+					title: 'Goals By Category',
+					icon: 'glyphicon-star',
+					content: 'Lorem ipsum dolor sit amet, consectetur \
+					adipiscing elit. Nulla quis interdum enim. Curabitur a \
+					magna nec ipsum commodo ultrices. Nullam blandit justo eu \
+					ultricies laoreet.'
+				},
+				{
+					title: 'Goals This Month',
+					icon: 'glyphicon-star',
+					content: 'Lorem ipsum dolor sit amet, consectetur \
 					adipiscing elit. Nulla quis interdum enim. Curabitur a \
 					magna nec ipsum commodo ultrices. Nullam blandit justo eu \
 					ultricies laoreet.'

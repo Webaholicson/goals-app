@@ -1,5 +1,5 @@
 define([], function() {
-	var Controller = function($animate) {
+	var Controller = function() {
 		
 		var ctrl = this;
 		
@@ -9,12 +9,7 @@ define([], function() {
 		
 		ctrl.description = '';
 		
-		ctrl.$onInit = function() {
-			$('.slide').fadeIn();
-		};
 	}
-	
-	Controller.$inject = ['$animate'];
 	
 	return Controller;
 });
