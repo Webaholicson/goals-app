@@ -1,0 +1,19 @@
+<div class="form-group" ng-class="{'has-error': $ctrl.options.invalid}">
+	<input 
+		id="{{$ctrl.options.id}}" 
+		type="{{$ctrl.options.type}}" 
+		class="{{$ctrl.options.class}}" 
+		name="{{$ctrl.options.name}}" 
+		placeholder="{{$ctrl.options.placeholder}}"
+		trim="true"
+		required
+		ng-model="$ctrl.model[$ctrl.label]"
+		aria-describedby="help-block-{{$ctrl.id}}"
+	/>
+	<span 
+		id="help-block-{{$ctrl.id}}"
+		ng-show="$ctrl.options.invalid" 
+		class="help-block">
+		This field is required
+	</span>
+</div>

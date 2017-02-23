@@ -6,9 +6,6 @@ define([], function() {
 		ctrl.title = '';
 		
 		ctrl.icon = '';
-		
-		ctrl.description = '';
-		
 	}
 	
 	return Controller;

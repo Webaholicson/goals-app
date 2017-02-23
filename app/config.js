@@ -1,4 +1,4 @@
-define([], function(){
+define(function() {
 	'use strict';
 	
 	function Config($routeProvider, $locationProvider) {
@@ -11,17 +11,40 @@ define([], function(){
 					return $rootScope.$$childHead.$ctrl;
 				}
 			}
-		}).when('/register', {
+		});
+		
+		$routeProvider.when('/register', {
 			template: '<gt-register></gt-register>'
-		}).when('/forgot-password', {
+		});
+		
+		$routeProvider.when('/forgot-password', {
 			template: '<gt-forgot-password></gt-forgot-password>'
-		}).when('/dashboard', {
+		});
+		
+		$routeProvider.when('/dashboard', {
 			template: '<gt-dashboard></gt-dashboard>'
-		}).when('/goal/edit', {
-			template: '<gt-goal template="edit"></gt-goal>'
-		}).when('/goal/edit/:id', {
-			template: '<gt-goal template="edit"></gt-goal>'
-		}).when('/goal', {
+		});
+		
+		$routeProvider.when('/goal/edit', {
+			template: '<gt-goal goal="$resolve.goal" template="edit"></gt-goal>',
+			resolve: {
+				goal: function($firebase) {
+					return $firebase.database().ref('goals');
+				}
+			}
+		});
+		
+		$routeProvider.when('/goal/edit/:goalid', {
+			template: '<gt-goal goal="$resolve.goal" template="edit"></gt-goal>',
+			resolve: {
+				goal: function($firebase, $routeParams) {
+					return $firebase.database()
+						.ref('goals/'+$routeParams.goalid);
+				}
+			}
+		});
+		
+		$routeProvider.when('/goal', {
 			template: '<gt-goal template="index"></gt-goal>'
 		});
 	}

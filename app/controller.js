@@ -7,6 +7,9 @@ define([], function(){
 		ctrl.$onInit = function() {
 			if ($user.isLoggedIn) {
 				ctrl.isLoggedIn = true;
+				if ($location.url() !== '/') {
+					return $location.url();
+				}
 				return $location.url('/dashboard');
 			}
 			

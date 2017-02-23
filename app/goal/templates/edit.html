@@ -1,47 +1,55 @@
 <div id="new-goal" class="page row">
-	<form name="edit_goal" action="/goal/save" class="col-xs-12 card slide">
-	<h4><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Goal<h4>
-	<hr/>
-	<div class="form-group">
-		<input type="text" class="form-control" id="label" name="label" placeholder="Label">
+	<div class="col-xs-12">
+		<gt-card title="{{$ctrl.title}}">
+			<form novalidate name="edit_goal">
+				<gt-input 
+					label="title" 
+					model="$ctrl.goal" 
+					options="$ctrl.fields.label"
+				></gt-input>
+				
+				<!-- <div class="form-group">
+					<textarea class="form-control" rows="5" placeholder="Description" 
+						id="description" name="description"></textarea>
+				</div> -->
+				<!-- <h5>Schedule</h5>
+				<hr />
+				<div id="schedule-box">
+					<div class="form-group">
+						Schedule this goal 
+						<span class="schedule-box-selector">...</span>
+						<select name="main_interval">
+							<option value="every">every</option>
+							<option value="for">for</option>
+						</select>
+						<select name="date_part_every">
+							<option value="n-value">X</option>
+							<option value="day">day</option>
+							<option value="hour">hour</option>
+						</select>
+						<select name="date_part_for">
+							<option value="n-value">X</option>
+							<option value="weekdays">these weekdays</option>
+							<option value="weekdays">these hours</option>
+						</select>
+						<select name="date_part_nvalue">
+							<option value="day">day(s)</option>
+							<option value="hour">hour(s)</option>
+						</select>
+						<input type="text" name="start_date" 
+							placeholder="start date">
+						<select name="modifiers">
+							<option value="and">and</option>
+							<option value="unless">unless</option>
+							<option value="until">until</option>
+						</select>
+						<input type="text" name="start_date" 
+							placeholder="end date">
+					</div>
+				</div> -->
+				<button ng-click="$ctrl.saveGoal(edit_goal)" type="submit" 
+					class="btn btn-default">Save</button>
+			</form>
+		</gt-card>
 	</div>
-	<div class="form-group">
-		<textarea class="form-control" placeholder="Description" 
-			id="description" name="description">
-		</textarea>
-	</div>
-	<h5>Schedule</h5>
-	<hr />
-	<div id="schedule-box">
-		<div class="form-group">
-			Schedule this goal <span class="schedule-box-selector">...</span>
-			<select name="main_interval">
-				<option value="every">every</option>
-				<option value="for">for</option>
-			</select>
-			<select name="date_part_every">
-				<option value="n-value">X</option>
-				<option value="day">day</option>
-				<option value="hour">hour</option>
-			</select>
-			<select name="date_part_for">
-				<option value="n-value">X</option>
-				<option value="weekdays">these weekdays</option>
-				<option value="weekdays">these hours</option>
-			</select>
-			<select name="date_part_nvalue">
-				<option value="day">day(s)</option>
-				<option value="hour">hour(s)</option>
-			</select>
-			<input type="text" name="start_date" placeholder="start date">
-			<select name="modifiers">
-				<option value="and">and</option>
-				<option value="unless">unless</option>
-				<option value="until">until</option>
-			</select>
-			<input type="text" name="start_date" placeholder="end date">
-		</div>
-	</div>
-	<button type="submit" class="btn btn-default">Save</button>
-  </form>
 </div>
