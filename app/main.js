@@ -1,15 +1,21 @@
 define(function(require) {
 	'use strict';
 	
+	// Vendors
 	var $ 					= require('jquery');
 	var ng 					= require('angular.min');
 	var Router 				= require('angular-route');
 	var Bootstrap 			= require('bootstrap.min');
 	var Config 				= require('app/config');
 	
+	// Services
 	var FirebaseSrvc 		= require('app/services/firebase');
 	var UserSrvc 			= require('app/services/user');
 	
+	// Helpers
+	var StringHelper		= require('app/helpers/string');
+	
+	// Components
 	var gtApp 				= require('app/component');
 	var gtHeader 			= require('app/header/component');
 	var gtFooter 			= require('app/footer/component');
@@ -20,12 +26,14 @@ define(function(require) {
 	var gtNavItem 			= require('app/navigation/item/component');
 	var gtDashboard 		= require('app/dashboard/component');
 	var gtCard 				= require('app/card/component');
-	var gtGoal 				= require('app/goal/component');
+	var gtGoalEdit 			= require('app/goal/edit/component');
 	var gtInput				= require('app/form/input/component');
+	var gtText				= require('app/form/text/component');
 	
 	ng.module('GoalsApp', ['ngRoute'])
 		.factory('$firebase', FirebaseSrvc)
 		.factory('$user', UserSrvc)
+		.factory('$string', StringHelper)
 		.component('gtApp', gtApp)
 		.component('gtNav', gtNav)
 		.component('gtNavItem', gtNavItem)
@@ -36,7 +44,8 @@ define(function(require) {
 		.component('gtForgotPassword', gtForgotPassword)
 		.component('gtDashboard', gtDashboard)
 		.component('gtCard', gtCard)
-		.component('gtGoal', gtGoal)
+		.component('gtGoalEdit', gtGoalEdit)
 		.component('gtInput', gtInput)
+		.component('gtText', gtText)
 		.config(Config);
 });

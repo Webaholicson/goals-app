@@ -1,17 +1,17 @@
 <div class="form-group" ng-class="{'has-error': $ctrl.options.invalid}">
-	<input 
+	<textarea 
 		id="{{$ctrl.options.id}}" 
-		type="{{$ctrl.options.type}}" 
 		class="{{$ctrl.options.class}}" 
 		name="{{$ctrl.options.name}}" 
 		placeholder="{{$ctrl.options.placeholder}}"
+		rows="{{$ctrl.options.rows}}"
 		ng-model="$ctrl.model[$ctrl.label]"
 		aria-describedby="help-block-{{$ctrl.options.id}}"
-	/>
+	></textarea>
 	<span 
 		id="help-block-{{$ctrl.options.id}}"
-		ng-show="$ctrl.options.invalid == 'required'" 
+		ng-show="$ctrl.options.invalid" 
 		class="help-block">
-		This field is required
+		{{$ctrl.options.errorMsg}}
 	</span>
 </div>

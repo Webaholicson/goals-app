@@ -36,9 +36,9 @@ define([], function() {
 				$location.url('/dashboard');
 				$scope.$apply();
 			}, function(reason) {
-				ctrl.loginClass	= 'alert-danger';
-				ctrl.loginMsg     = 'Invalid username or password.';
-				ctrl.displayMsg   = true;
+				ctrl.loginClass		= 'alert-danger';
+				ctrl.loginMsg		= 'Invalid username or password.';
+				ctrl.displayMsg		= true;
 				$scope.$apply();
 				btn.button('reset');
 			});

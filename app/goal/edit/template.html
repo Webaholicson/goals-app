@@ -5,14 +5,16 @@
 				<gt-input 
 					label="title" 
 					model="$ctrl.goal" 
-					options="$ctrl.fields.label"
+					options="$ctrl.fields.title"
 				></gt-input>
 				
-				<!-- <div class="form-group">
-					<textarea class="form-control" rows="5" placeholder="Description" 
-						id="description" name="description"></textarea>
-				</div> -->
-				<!-- <h5>Schedule</h5>
+				<gt-text 
+					label="description" 
+					model="$ctrl.goal" 
+					options="$ctrl.fields.description"
+				></gt-text>
+				
+				<h5>Schedule</h5>
 				<hr />
 				<div id="schedule-box">
 					<div class="form-group">
@@ -46,10 +48,17 @@
 						<input type="text" name="start_date" 
 							placeholder="end date">
 					</div>
-				</div> -->
+				</div>
+				
 				<button ng-click="$ctrl.saveGoal(edit_goal)" type="submit" 
 					class="btn btn-default">Save</button>
 			</form>
+			<div 
+				class="alert" 
+				role="alert"
+				ng-class="{'alert-danger': !$ctrl.goalSaved, 'alert-success': $ctrl.goalSaved}" 
+				ng-show="$ctrl.goalSaved && $ctrl.goalMessage != ''"
+			>{{$ctrl.goalMessage}}</div>
 		</gt-card>
 	</div>
 </div>

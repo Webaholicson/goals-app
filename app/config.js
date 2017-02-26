@@ -26,26 +26,21 @@ define(function() {
 		});
 		
 		$routeProvider.when('/goal/edit', {
-			template: '<gt-goal goal="$resolve.goal" template="edit"></gt-goal>',
-			resolve: {
-				goal: function($firebase) {
-					return $firebase.database().ref('goals');
-				}
-			}
+			template: '<gt-goal-edit></gt-goal-edit>'
 		});
 		
 		$routeProvider.when('/goal/edit/:goalid', {
-			template: '<gt-goal goal="$resolve.goal" template="edit"></gt-goal>',
+			template: '<gt-goal-edit goal="$resolve.goal"></gt-goal-edit>',
 			resolve: {
-				goal: function($firebase, $routeParams) {
+				goal: function($firebase, $route) {
 					return $firebase.database()
-						.ref('goals/'+$routeParams.goalid);
+						.ref('goals/'+$route.current.params.goalid)
 				}
 			}
 		});
 		
 		$routeProvider.when('/goal', {
-			template: '<gt-goal template="index"></gt-goal>'
+			template: '<gt-goal-list></gt-goal-list>'
 		});
 	}
 	
