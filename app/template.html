@@ -1,8 +1,46 @@
 <div ng-class="{home: !$ctrl.isLoggedIn}" class="wrapper container-fluid">
 	<gt-header show-notification="$ctrl.isLoggedIn"></gt-header>
-
-	<gt-nav on-logout="$ctrl.logout()" ng-show="$ctrl.isLoggedIn"></gt-nav>
-
+	
+	<nav id="main-nav" class="row">
+		<gt-nav on-logout="$ctrl.logout()" ng-show="$ctrl.isLoggedIn">
+			<gt-nav-item 
+				url="/dashboard" 
+				icon="glyphicon-home" 
+				action="navigate">
+			</gt-nav-item>
+			
+			<gt-nav-item 
+				url="/edit/goal" 
+				icon="glyphicon-plus"
+				action="navigate">
+			</gt-nav-item>
+			
+			<gt-nav-item 
+				url="/reports" 
+				icon="glyphicon-signal"
+				action="navigate">
+			</gt-nav-item>
+			
+			<gt-nav-item 
+				url="/reports" 
+				icon="glyphicon-wrench"
+				action="navigate">
+			</gt-nav-item>
+			
+			<gt-nav-item 
+				url="/profile" 
+				icon="glyphicon-user"
+				action="navigate">
+			</gt-nav-item>
+			
+			<gt-nav-item 
+				url="/logout" 
+				icon="glyphicon-lock"
+				action="logout">
+			</gt-nav-item>
+		</gt-nav>
+	</nav>
+	
 	<main id="content" class="container-fluid">
 		<div ng-view></div>
 	</main>
