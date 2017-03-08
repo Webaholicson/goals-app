@@ -7,7 +7,7 @@ define(function() {
 			
 			slugify: function(value) {
 				return this.trim(value)
-					.replace(/\s/, '_')
+					.replace(/\s/g, '_')
 					.toLowerCase();
 			}
 		}
