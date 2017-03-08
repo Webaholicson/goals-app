@@ -1,6 +1,3 @@
-<nav id="main-nav" class="row">
-	<div class="nav-container">
-		<gt-nav-item ng-repeat="item in $ctrl.items" on-click="$ctrl.onClick(item)" item="item"></gt-nav-item>
-	</div>
-	<span id="menu-item-state" class="col-xs-2"></span>
+<div class="nav-container" ng-transclude>
 </div>
+<span id="menu-item-state" class="col-xs-2"></span>

@@ -4,9 +4,14 @@ define(['app/navigation/item/controller'], function(Controller) {
 	return {
 		templateUrl: 'app/navigation/item/template.html',
 		controller: Controller,
+		require: {
+			navCtrl: '^gtNav'
+		},
 		bindings: {
-		    item: '<',
-			onClick: '&'
-  		}
+			action: '@',
+			icon: '@',
+			url: '@',
+		}
+		
 	}
 })

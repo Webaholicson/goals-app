@@ -1,6 +1,6 @@
-<div ng-click="$ctrl.click($event)" class="col-xs-2 nav-item text-center"
-	ng-class="{current: $ctrl.item.isSelected}">
+<div id="{{$ctrl.item.id}}" ng-click="$ctrl.click()" class="col-xs-2 nav-item text-center"
+	ng-class="{current: $ctrl.isSelected}">
 	<div class="row panel-body">
-		<span class="glyphicon {{$ctrl.item.icon}}"></span>
+		<span class="glyphicon {{$ctrl.icon}}"></span>
 	</div>
 </div>

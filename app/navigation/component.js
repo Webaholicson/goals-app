@@ -4,6 +4,7 @@ define(['app/navigation/controller'], function(Controller) {
 	return  {
 		templateUrl: 'app/navigation/template.html',
 		controller: Controller,
+		transclude: true,
 		bindings: {
 			onLogout: '&'
 		}

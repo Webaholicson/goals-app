@@ -1,4 +1,4 @@
-define([], function() {
+define(function() {
 	'use strict';
 	
 	var Controller = function($scope, $user, $location) {
@@ -6,90 +6,64 @@ define([], function() {
 		
 		var itemSelector = '.nav-item';
 		
-		ctrl.onClick = function(navItem) {
-			navItem.events.onclick();
+		ctrl.items = [];
+		
+		ctrl.currentItem = null;
+		
+		ctrl.addNavItem = function(item) {
+			this.items.push(item);
 			
-			angular.forEach(ctrl.items, function(item) {
-				item.isSelected = false;
-			});
-			
-			if (navItem.name === 'logout') {
-				ctrl.items[0].isSelected = true;
-			} else {
-				navItem.isSelected = true;
+			if (ctrl.currentItem) {
+				return;
 			}
+			
+			var index = 0;
+			
+			if ($location.url() === '/') {
+				ctrl.currentItem = ctrl.items[0];
+				ctrl.currentItem.isSelected = true;
+			}
+			
+			if ($location.path() === item.url) {
+				item.isSelected = true;
+				ctrl.currentItem = item;
+				index = ctrl.items.indexOf(item);
+			}
+			
+			$(itemSelector).eq(index).css({
+				background: 'linear-gradient(#ac2929, #711414);'
+			});
 		};
 		
-		ctrl.items = [
-			{
-				icon: 'glyphicon-home',
-				isSelected: true,
-				events: {
-					onclick: function() {
-						return $location.url('/dashboard')
-					}
+		ctrl.actions = {
+			logout: function(navItem) {
+				this.navigate(navItem);
+				
+				$(itemSelector).eq(0).css({
+					background: 'linear-gradient(#ac2929, #711414);'
+				});
+				
+				$user.logout().then(function(value) {
+					$location.url('/login');
+					ctrl.onLogout();
+				})
+			},
+			
+			navigate: function(navItem) {
+				angular.forEach(ctrl.items, function(item) {
+					item.isSelected = false;
+				});
+				
+				if (navItem.url === '/logout') {
+					ctrl.currentItem = ctrl.items[0];
+					ctrl.currentItem.isSelected = true;
+				} else {
+					ctrl.currentItem = navItem;
+					navItem.isSelected = true;
+					return $location.url(navItem.url);
 				}
 			},
-			{
-				name: 'edit_goal',
-				icon: 'glyphicon-plus',
-				isSelected: false,
-				events: {
-					onclick: function() {
-						return $location.url('/goal/edit')
-					}
-				}
-			},
-			{
-				name: 'report',
-				icon: 'glyphicon-signal',
-				isSelected: false,
-				events: {
-					onclick: function() {
-						return $location.url('/reports')
-					}
-				}
-			},
-			{
-				name: 'settings',
-				icon: 'glyphicon-wrench',
-				isSelected: false,
-				events: {
-					onclick: function() {
-						return $location.url('/settings')
-					}
-				}
-			},
-			{
-				name: 'profile',
-				icon: 'glyphicon-user',
-				isSelected: false,
-				events: {
-					onclick: function() {
-						return $location.url('/profile')
-					}
-				}
-			},
-			{
-				name: 'logout',
-				icon: 'glyphicon-lock',
-				isSelected: false,
-				events: {
-					onclick: function() {
-						$user.logout().then(function(value) {
-							$location.url('/login');
-							ctrl.onLogout()
-						})
-					}
-				}
-			},
-		];
-		
-		ctrl.$onInit = function() {
-			$(itemSelector).eq(0).css({
-				background: 'linear-gradient(#ac2929, #711414);'
-			})
-		}
+		};
 	};
 	
 	Controller.$inject = ['$scope', '$user', '$location'];

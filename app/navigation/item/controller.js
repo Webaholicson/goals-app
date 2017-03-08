@@ -5,7 +5,11 @@ define([], function() {
 		var ctrl = this;
 		
 		ctrl.click = function() {
-			ctrl.onClick(ctrl.item);
+			ctrl.navCtrl.actions[ctrl.action](ctrl);
+		}
+		
+		ctrl.$onInit = function() {
+			ctrl.navCtrl.addNavItem(this);
 		}
 	};
 	
