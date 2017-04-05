@@ -18,7 +18,6 @@ define(function(require) {
 	// Components
 	var gtApp 				= require('app/component');
 	var gtHeader 			= require('app/header/component');
-	var gtFooter 			= require('app/footer/component');
 	var gtLogin 			= require('app/users/login/component');
 	var gtRegister 			= require('app/users/register/component');
 	var gtForgotPassword 	= require('app/users/forgotpassword/component');
@@ -27,9 +26,9 @@ define(function(require) {
 	var gtDashboard 		= require('app/dashboard/component');
 	var gtCard 				= require('app/card/component');
 	var gtGoalEdit 			= require('app/goal/edit/component');
-	var gtInput				= require('app/form/input/component');
-	var gtText				= require('app/form/text/component');
+	var gtField				= require('app/field/component');
 	
+	// Initialize the app
 	ng.module('GoalsApp', ['ngRoute'])
 		.factory('$firebase', FirebaseSrvc)
 		.factory('$user', UserSrvc)
@@ -38,14 +37,12 @@ define(function(require) {
 		.component('gtNav', gtNav)
 		.component('gtNavItem', gtNavItem)
 		.component('gtHeader', gtHeader)
-		.component('gtFooter', gtFooter)
 		.component('gtLogin', gtLogin)
 		.component('gtRegister', gtRegister)
 		.component('gtForgotPassword', gtForgotPassword)
 		.component('gtDashboard', gtDashboard)
 		.component('gtCard', gtCard)
 		.component('gtGoalEdit', gtGoalEdit)
-		.component('gtInput', gtInput)
-		.component('gtText', gtText)
+		.component('gtField', gtField)
 		.config(Config);
 });

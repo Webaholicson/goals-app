@@ -13,6 +13,10 @@ define([], function(){
 				return $location.url('/dashboard');
 			}
 			
+			if ($location.url() === '/register' || $location.url() === '/forgot-password') {
+				return $location.url();
+			}
+			
 			return $location.url('/login');
 		}
 		

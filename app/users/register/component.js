@@ -3,6 +3,9 @@ define(['app/users/register/controller'], function(Controller) {
 	
 	return {
 		controller: Controller,
-		template: 'app/users/register/template.html'
+		templateUrl: 'app/users/register/template.html',
+		bindings: {
+			model: '<'
+		}
 	}
 })

@@ -1,0 +1,17 @@
+<form name="profile_form">
+	<gt-input 
+		label="first_name" 
+		model="$ctrl.user" 
+		options="$ctrl.fields.first_name"
+	></gt-input>
+	
+	<gt-input 
+		label="last_name" 
+		model="$ctrl.user" 
+		options="$ctrl.fields.last_name"
+	></gt-input>
+	
+	<div class="form-group text-center">
+		<p><a href="#" ng-click="$ctrl.save()">Save</a></p>
+	</div>
+<form>

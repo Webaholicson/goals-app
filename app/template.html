@@ -1,5 +1,7 @@
 <div ng-class="{home: !$ctrl.isLoggedIn}" class="wrapper container-fluid">
-	<gt-header show-notification="$ctrl.isLoggedIn"></gt-header>
+	<header id="main-header" class="row">
+		<gt-header show-notification="$ctrl.isLoggedIn"></gt-header>
+	</header>
 	
 	<nav id="main-nav" class="row">
 		<gt-nav on-logout="$ctrl.logout()" ng-show="$ctrl.isLoggedIn">
@@ -10,7 +12,7 @@
 			</gt-nav-item>
 			
 			<gt-nav-item 
-				url="/edit/goal" 
+				url="/goal/edit" 
 				icon="glyphicon-plus"
 				action="navigate">
 			</gt-nav-item>
@@ -22,7 +24,7 @@
 			</gt-nav-item>
 			
 			<gt-nav-item 
-				url="/reports" 
+				url="/settings" 
 				icon="glyphicon-wrench"
 				action="navigate">
 			</gt-nav-item>
@@ -44,6 +46,8 @@
 	<main id="content" class="container-fluid">
 		<div ng-view></div>
 	</main>
-
-	<gt-footer></gt-footer>
+	
+	<footer id="main-footer" class="row">
+		<p class="text-center">Goal Tracker v1.0.0</p>
+	</footer>
 </div>

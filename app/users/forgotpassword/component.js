@@ -3,6 +3,6 @@ define(['app/users/forgotpassword/controller'], function(Controller) {
 	
 	return {
 		controller: Controller,
-		template: 'app/users/forgotpassword/template.html'
+		templateUrl: 'app/users/forgotpassword/template.html'
 	}
 })

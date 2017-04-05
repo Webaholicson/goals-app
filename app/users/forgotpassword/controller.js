@@ -1,11 +1,14 @@
 define([], function() {
+	'use strict';
 	
 	var ForgotPasswordCtrl = function(scope, $firebase) {
-	    $scope.data = {};
+		var ctrl = this;
+		
+	    ctrl.data = {};
 
-	    $scope.user = {};
+	    ctrl.user = {};
 
-	    $scope.lookup = function() {
+	    ctrl.lookup = function() {
 	      $scope.user.auth = $firebase.auth().sendPasswordResetEmail(
 	        $scope.data['email']
 	      );

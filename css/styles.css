@@ -117,24 +117,38 @@ body {
 	height: 100px;
 }
 
-#login {
+#login,
+#register,
+#forgot_password {
 	width: 90%;
-	margin: 3.5em auto;
+	margin: 1.5em auto;
 }
 
 .hide {
 	display: none;
 }
 
-#login .card {
+#login form, 
+#register form,
+#forgot_password form {
 	color: #fff;
 	border: 1px solid #060100;
     box-shadow: 0px 2px 5px 0px #120703;
     background-color: rgba(45, 11, 11, 0.72);
 }
 
-#login a {
+#login a,
+#register a,
+#forgot_password a {
 	color : #fff;
+}
+
+.home .help-block {
+	color: #fff;
+}
+
+.home #main-nav {
+	display: none;
 }
 
 .home {

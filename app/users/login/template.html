@@ -1,5 +1,5 @@
-<div id="login" class="row page active">
-	<form name="login_form" class="col-xs-12 card">
+<div id="login" class="row">
+	<form name="login_form" class="col-xs-12">
 		<h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login</h4>
 		<hr/>
 		<div class="form-group" ng-class="{'has-error': $ctrl.loginAttempted && (login_form.email.$error.email || login_form.email.$error.required)}">
@@ -13,8 +13,8 @@
 		</div>
 		<div ng-class="$ctrl.loginClass" ng-show="$ctrl.displayMsg" ng-bind="$ctrl.loginMsg" class="alert" role="alert"></div>
 		<div class="form-group text-center">
-			<p><a href="#" ng-click="$goto('register')">Register</a></p>
-			<p><a href="#" ng-click="$goto('forgot_password')">Forgot password?</a></p>
+			<p><a href="/register">Register</a></p>
+			<p><a href="/forgot-password">Forgot password?</a></p>
 		</div>
 	</form>
 </div>

@@ -42,6 +42,16 @@ define(function() {
 		$routeProvider.when('/goal', {
 			template: '<gt-goal-list></gt-goal-list>'
 		});
+		
+		$routeProvider.when('/profile', {
+			template: '<gt-card><gt-profile user="$resolve.user"></gt-profile></gt-card>',
+			resolve: {
+				user: function($firebase) {
+					var user = $firebase.auth().current;
+					return;
+				}
+			}
+		})
 	}
 	
 	Config.$inject = ['$routeProvider', '$locationProvider'];

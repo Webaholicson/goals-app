@@ -13,33 +13,38 @@ define(function(require) {
 		
 		ctrl.goalMessage = '';
 		
+		ctrl.fieldModels = {},
+		
 		ctrl.fields = {
-			title: {
-				type: 'text',
-				placeholder: 'Title',
-				value: '',
-				class: 'form-control ',
-				id: 'title',
-				name: 'title',
-				validation: {
-					'ng-required': true,
-					'ng-trim': true,
+			'title': {
+				'type': 'text',
+				'attr': {
+					'placeholder': 'Title',
+					'value': '',
+					'class': 'form-control ',
+					'id': 'title',
+					'name': 'title',
 				},
-				invalid: false,
-				errorMsg: 'This field is required.',
+				'validation': {
+					'required': true,
+					'trim': true,
+				},
 			},
 			
-			description: {
-				placeholder: 'Description',
-				text: '',
-				class: 'form-control ',
-				id: 'description',
-				name: 'description',
-				rows: "5",
-				validation: null,
-				invalid: false,
-				errorMsg: '',
+			'description': {
+				'type': 'textarea',
+				'attr': {
+					'placeholder': 'Description',
+					'class': 'form-control ',
+					'id': 'description',
+					'name': 'description',
+					'rows': "5",
+				}
 			}
+		};
+		
+		ctrl.addField = function(fieldModel) {
+			ctrl.fieldModels[fieldModel.fid] = fieldModel;
 		};
 		
 		ctrl.$onInit = function() {
@@ -49,43 +54,59 @@ define(function(require) {
 					ctrl.title = 'Edit Goal: ' + ctrl.goal.title;
 					$scope.$apply();
 				});
-			} else {
-				ctrl.goal = {
-					id: null,
-					title: '',
-					description: '',
-					schedule: {},
-				};
+				
+				return;
 			}
+			
+			ctrl.goal = {
+				id: null,
+				title: '',
+				description: '',
+				schedule: {},
+			};
 		};
 		
 		ctrl.saveGoal = function(form) {
-			if (form.$valid) {
-				if (!ctrl.goal.id) {
-					ctrl.goal.id = $string.slugify(ctrl.goal.title);
-					var goal = $firebase.database().ref('goals/'+ctrl.goal.id);
-					goal.set(ctrl.goal).then(function() {
-						ctrl.goalSaved = true;
-						ctrl.goalMessage = 'Goal saved!';
-					}).catch(function(error) {
-						ctrl.goalMessage = 'Goal not saved: ';
-					});;
-				} else {
-					var goal = $firebase.database().ref('goals/'+ctrl.goal.id);
-					goal.set(ctrl.goal);
-				}
-			} else {
+			if (!form.$valid) {
 				ng.forEach(ctrl.fields, function(v) {
 					v.invalid = false;
+					v.errorMsg = '';
 				});
 				
-				ng.forEach(form.$error, function(v) {
+				ng.forEach(form.$error, function(v, err) {
 					ng.forEach(v, function(field) {
-						console.log(field);
+						var key = 'ng-'+err;
+						var error = ctrl.fields[field.$name].validation[key].msg;
+							
+						ctrl.fields[field.$name].errorMsg = error;
 						ctrl.fields[field.$name].invalid = field.$invalid;
+						return;
 					});
 				});
+				
+				return;
 			}
+			
+			if (!ctrl.goal.id) {
+				ctrl.goal.id = $string.slugify(ctrl.goal.title);
+				var goal = $firebase.database().ref('goals/'+ctrl.goal.id);
+				goal.set(ctrl.goal).then(function() {
+					ctrl.goalSaved = true;
+					ctrl.goalMessage = 'Goal saved!';
+					form.$setPristine();
+					form.$setUntouched();
+					document.getElementsByTagName('form')[0].reset();
+					$scope.$apply();
+				}).catch(function(error) {
+					ctrl.goalMessage = 'Goal not saved: '+error;
+					$scope.$apply();
+				});
+				
+				return;
+			}
+			
+			var goal = $firebase.database().ref('goals/'+ctrl.goal.id);
+			goal.set(ctrl.goal);
 		};
 	}
 	

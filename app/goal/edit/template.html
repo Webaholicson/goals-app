@@ -1,18 +1,14 @@
-<div id="new-goal" class="page row">
+<div id="edit-goal" class="page row">
 	<div class="col-xs-12">
 		<gt-card title="{{$ctrl.title}}">
 			<form novalidate name="edit_goal">
-				<gt-input 
-					label="title" 
-					model="$ctrl.goal" 
-					options="$ctrl.fields.title"
-				></gt-input>
-				
-				<gt-text 
-					label="description" 
-					model="$ctrl.goal" 
-					options="$ctrl.fields.description"
-				></gt-text>
+				<gt-field 
+					ng-repeat="(fid, field) in $ctrl.fields" 
+					fid="fid" 
+					options="field"
+					model="$ctrl.model"
+					on-init-field="$ctrl.addField(fieldModel)"
+				></gt-field>
 				
 				<h5>Schedule</h5>
 				<hr />
@@ -53,12 +49,14 @@
 				<button ng-click="$ctrl.saveGoal(edit_goal)" type="submit" 
 					class="btn btn-default">Save</button>
 			</form>
+			<br />
 			<div 
 				class="alert" 
 				role="alert"
 				ng-class="{'alert-danger': !$ctrl.goalSaved, 'alert-success': $ctrl.goalSaved}" 
-				ng-show="$ctrl.goalSaved && $ctrl.goalMessage != ''"
-			>{{$ctrl.goalMessage}}</div>
+				ng-show="$ctrl.goalSaved && $ctrl.goalMessage">
+				{{$ctrl.goalMessage}}
+			</div>
 		</gt-card>
 	</div>
 </div>
