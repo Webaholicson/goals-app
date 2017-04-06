@@ -1,7 +1,7 @@
 define([], function() {
 	'use strict';
 	
-	function Controller($animate) {
+	function Controller() {
 		var ctrl = this;
 		
 		ctrl.cards = [];
