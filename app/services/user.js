@@ -5,12 +5,11 @@ define([], function() {
 	 * UserService constructor function
 	 * 
 	 * @constructor
-	 * @param {Firebase} $firebase - The Firebase service
 	 * @param {Object} $window - The Angular window service
 	 * @param {Object} $location - The Angular location service
 	 * @return {Object} - The User Service
 	 */
-	function UserService($firebase, $window, $location) {
+	function UserService($window, $location) {
 		return {
 			/**
 			 * Current User object
@@ -78,7 +77,7 @@ define([], function() {
 		}
 	};
 	
-	UserService.$inject = ['$firebase', '$window', '$location'];
+	UserService.$inject = ['$window', '$location'];
 	
 	return UserService;
 });

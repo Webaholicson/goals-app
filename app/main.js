@@ -9,7 +9,6 @@ define(function(require) {
 	var Config 				= require('app/config');
 	
 	// Services
-	var FirebaseSrvc 		= require('app/services/firebase');
 	var UserSrvc 			= require('app/services/user');
 	
 	// Helpers
@@ -30,7 +29,6 @@ define(function(require) {
 	
 	// Initialize the app
 	ng.module('GoalsApp', ['ngRoute'])
-		.factory('$firebase', FirebaseSrvc)
 		.factory('$user', UserSrvc)
 		.factory('$string', StringHelper)
 		.component('gtApp', gtApp)

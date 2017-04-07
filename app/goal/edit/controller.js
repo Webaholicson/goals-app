@@ -3,7 +3,7 @@ define(function(require) {
 	
 	var ng = require('angular.min');
 	
-	var Controller = function($firebase, $string, $scope) {
+	var Controller = function($string, $scope) {
     	
 		var ctrl = this;
 		
@@ -110,7 +110,7 @@ define(function(require) {
 		};
 	}
 	
-	Controller.$inject = ['$firebase', '$string', '$scope'];
+	Controller.$inject = ['$string', '$scope'];
 	
 	return Controller;
 });
