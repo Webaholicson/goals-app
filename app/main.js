@@ -11,6 +11,7 @@ define(function(require) {
 	// Services
 	var FirebaseSrvc 		= require('app/services/firebase');
 	var UserSrvc 			= require('app/services/user');
+	var ModelSrvc 			= require('app/services/model');
 	
 	// Helpers
 	var StringHelper		= require('app/helpers/string');
@@ -32,6 +33,7 @@ define(function(require) {
 	ng.module('GoalsApp', ['ngRoute'])
 		.factory('$firebase', FirebaseSrvc)
 		.factory('$user', UserSrvc)
+		.factory('$model', ModelSrvc)
 		.factory('$string', StringHelper)
 		.component('gtApp', gtApp)
 		.component('gtNav', gtNav)
