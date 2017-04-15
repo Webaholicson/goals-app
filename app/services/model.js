@@ -17,9 +17,25 @@ define(function(require) {
 		
 		this._saved = false;
 		
-		this.init = function() {
+		this.init = function(defaults) {
 			this._singularName = singularName;
 			this._refName = refName;
+			
+			for (var key in defaults) {
+				this[key] = defaults[key];
+			}
+			
+			if (!this._fields.length) {
+				throw 'EmptyFields';
+			}
+			
+			if (!this._singularName) {
+				throw 'InvalidSingularName';
+			}
+			
+			if (!this._refName) {
+				throw 'InvalidRefName';
+			}
 		}
 		
 		this.save = function(onSuccess, onError) {
