@@ -25,6 +25,7 @@ define(function(require) {
 	var gtLogin 			= require('app/users/login/component');
 	var gtRegister 			= require('app/users/register/component');
 	var gtForgotPassword 	= require('app/users/forgotpassword/component');
+	var gtProfile			= require('app/users/profile/component');
 	var gtNav 				= require('app/navigation/component');
 	var gtNavItem 			= require('app/navigation/item/component');
 	var gtDashboard 		= require('app/dashboard/component');
@@ -46,6 +47,7 @@ define(function(require) {
 		.component('gtLogin', gtLogin)
 		.component('gtRegister', gtRegister)
 		.component('gtForgotPassword', gtForgotPassword)
+		.component('gtProfile', gtProfile)
 		.component('gtDashboard', gtDashboard)
 		.component('gtCard', gtCard)
 		.component('gtGoalEdit', gtGoalEdit)

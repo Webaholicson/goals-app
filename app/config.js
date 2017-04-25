@@ -44,11 +44,11 @@ define(function() {
 		});
 		
 		$routeProvider.when('/profile', {
-			template: '<gt-card><gt-profile user="$resolve.user"></gt-profile></gt-card>',
+			template: '<gt-profile model="$resolve.user"></gt-profile>',
 			resolve: {
-				user: function($firebase) {
-					var user = $firebase.auth().current;
-					return;
+				user: function(UserModel, $user) {
+					var user = $user.getCurrentUser();
+					return UserModel.find(user.uid);
 				}
 			}
 		})
