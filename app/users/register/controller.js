@@ -2,10 +2,9 @@ define(function(require) {
 	'use strict';
 	
 	var ng			= require('angular.min');
-	var User		= require('app/users/user');
 	var FieldList	= require('app/users/register/fields');
 	
-	var Controller = function($scope, $user, $location) {
+	var Controller = function($scope, $user, $location, UserModel) {
 		
 		var ctrl = this;
 		
@@ -17,13 +16,13 @@ define(function(require) {
 		
 		ctrl.fieldModels = {};
 		
-		ctrl.model = new User();
+		ctrl.model = UserModel;
+		
+		ctrl.fields = new FieldList();
 		
 		ctrl.addField = function(field) {
 			ctrl.fieldModels[field.fid] = field
 		}
-		
-		ctrl.fields = new FieldList(),
 		
 		ctrl.register = function(form, $event) {
 			var btn = angular.element(event.target).button('loading');
@@ -49,7 +48,16 @@ define(function(require) {
 				ctrl.model['email'],
 				ctrl.model['password']
 			).then(function(value) {
-		  		
+		  		ctrl.model.save(function(res) {
+					btn.button('reset');
+					$location.url('/login');
+					$scope.$apply();
+				}, function(error) {
+					ctrl.registerClass		= 'alert-danger';
+					ctrl.registerMsg		= error.message;
+					$scope.$apply();
+					btn.button('reset');
+				}, $user.getCurrentUser().uid);
 			}, function(error) {
 				ctrl.registerClass		= 'alert-danger';
 				ctrl.registerMsg		= error.message;
@@ -60,7 +68,7 @@ define(function(require) {
 		};
 	}
 	
-	Controller.$inject = ['$scope', '$user', '$location'];
+	Controller.$inject = ['$scope', '$user', '$location', 'UserModel'];
 	
 	return Controller;
 });
