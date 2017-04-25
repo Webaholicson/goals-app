@@ -1,4 +1,4 @@
-define([], function() {
+define(function() {
 	'use strict';
 	
 	/**
@@ -29,7 +29,25 @@ define([], function() {
 			 * @return {Number}
 			 */
 			getCurrentUserId: function() {
-				return  this.currentUser.uid || false;
+				return  this.getCurrentUser().uid;
+			},
+			
+			/**
+			 * Retrieves the current user id
+			 * @return {firebase.User|null}
+			 */
+			getCurrentUser: function() {
+				if (this.currentUser.uid) {
+					return this.currentUser;
+				}
+				
+				var user = $window.localStorage.getItem('currentUser');
+				
+				if (user) {
+					this.currentUser = JSON.parse(user);
+				}
+				
+				return this.currentUser;
 			},
 			
 			/**
@@ -47,8 +65,16 @@ define([], function() {
 							'isLoggedIn', 
 							true
 						);
+						
+						parent.currentUser.uid = value.uid;
+						parent.currentUser.email = value.email;
+						
+						$window.localStorage.setItem(
+							'currentUser', 
+							JSON.stringify(parent.currentUser)
+						);
+						
 						parent.isLoggedIn = true;
-						parent.currentUser = value;
 					});
 			},
 			
@@ -72,6 +98,7 @@ define([], function() {
 				var parent = this;
 				return $firebase.auth().signOut().then(function(value) {
 					$window.localStorage.removeItem('isLoggedIn');
+					$window.localStorage.removeItem('uid');
 					parent.isLoggedIn = false;
 				});
 			},
