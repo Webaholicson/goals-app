@@ -1,102 +1,139 @@
-define(function(require) {
+define(function() {
 	'use strict';
 	
-	var Model = function(singularName, refName) {
-		
-		this._singularName = '';
-		
-		this._refName = ''
-		
-		this._fields = [];
-		
-		this._ref = '';
-		
-		this._data = {};
-		
-		this._id = '';
-		
-		this._saved = false;
-		
-		this.init = function(defaults) {
-			this._singularName = singularName;
-			this._refName = refName;
+	function Model($firebase) {
+		return {
+			_singularName: '',
 			
-			for (var key in defaults) {
-				this[key] = defaults[key];
-			}
+			_refName: '',
 			
-			if (!this._fields.length) {
-				throw 'EmptyFields';
-			}
+			_fields: [],
 			
-			if (!this._singularName) {
-				throw 'InvalidSingularName';
-			}
+			_ref: null,
 			
-			if (!this._refName) {
-				throw 'InvalidRefName';
-			}
-		}
-		
-		this.save = function(onSuccess, onError) {
-			this._saved = false;
+			_data: {},
 			
-			if (this._data.length) {
-				this._ref = $firebase.db().ref(this._refName).push();
+			_id: '',
+			
+			_saved: false,
+			
+			init: function(singularName, refName, defaults) {
+				this._singularName = singularName;
+				this._refName = refName;
+				
+				for (var key in defaults) {
+					this[key] = defaults[key];
+				}
+				
+				if (!this._fields.length) {
+					throw 'EmptyFields';
+				}
+				
+				if (!this._singularName) {
+					throw 'InvalidSingularName';
+				}
+				
+				if (!this._refName) {
+					throw 'InvalidRefName';
+				}
+			},
+			
+			save: function(onSuccess, onError, refId) {
+				this._saved = false;
+				
+				if (!Object.keys(this._data).length) {
+					throw 'InvalidData';
+				}
+				
+				if (!this._ref) {
+					this._ref = $firebase.database().ref(this._refName);
+					if (!refId) {
+						this._ref = this._ref.push();
+					} else {
+						this._ref = this._ref.child(refId);
+					}
+				}
+				
+				var that = this;
 				this._ref.set(this._data)
 					.then(function(res) {
-						this._saved = true;
+						that._saved = true;
 						if (onSuccess) onSuccess(res);
 					})
 					.catch(function(error) {
 						if (onError) onError(error);
 					});
-			}
-			
-			return this;
-		};
-		
-		this.find = function(id) {
-			return $firebase.db().ref(this._refName+'/'+id).once()
-				.then(function(data) {
-					if (data) {
-						this._data = data.val();
-					}
-				}).catch(function() {
 					
-				});
-		};
-		
-		this.delete = function() {
-			return this._ref.remove();
-		};
-		
-		this.set = function(key, value) {
-			if (!key || !value) {
-				throw 'InvalidParams';
+				return this._ref;
+			},
+			
+			find: function(id) {
+				var that = this;
+				this._ref = $firebase.database().ref(this._refName+'/'+id);
+				return this._ref.once('value')
+					.then(function(data) {
+						if (data) {
+							that._data = data.val();
+							that._id = id;
+						}
+					}).catch(function(error) {
+						console.log(error);
+					});
+			},
+			
+			delete: function() {
+				if (this._ref) {
+					return this._ref.remove();
+				}
+			},
+			
+			set: function(key, value) {
+				if (!key || (!value && typeof key !== 'object')) {
+					throw 'InvalidParams';
+				}
+				
+				if (key === 'id') {
+					this._id = value;
+					this._data.id = value;
+					return this;
+				}
+				
+				if (typeof key === 'object') {
+					for (var k in key) {
+						if (this._fields.indexOf(k) === -1) {
+							throw 'InvalidProperty';
+						}
+						
+						this._data[k] = key[k];
+					}
+					
+					return this;
+				}
+				
+				if (this._fields.indexOf(key) === -1) {
+					throw 'InvalidProperty';
+				}
+				
+				this._data[key] = value;
+				
+				return this;
+			},
+			
+			get: function(key) {
+				if (!key) {
+					return this._data;
+				}
+				
+				return this._data[key] || null;
+			},
+			
+			getFields: function() {
+				return this._fields;
 			}
-			
-			if (this._fields.indexOf(key) === -1) {
-				throw 'InvalidProperty';
-			}
-			
-			this._data[key] = value;
-			
-			return this;
-		};
-		
-		this.get = function(key) {
-			if (!key) {
-				return this._data;
-			}
-			
-			return this._data[key] || null;
-		};
+		}
 	}
 	
-	return function(singularName, refName) {
-		var BaseModel = new Model(singularName, refName)
-		BaseModel.init();
-		return BaseModel;
-	}
+	Model.$inject = ['$firebase'];
+	
+	return Model;
 });
