@@ -13,7 +13,7 @@ define(function(require) {
 		
 		ctrl.goalMessage = '';
 		
-		ctrl.fieldModels = {},
+		ctrl.fieldModels = {};
 		
 		ctrl.fields = {
 			'title': {
