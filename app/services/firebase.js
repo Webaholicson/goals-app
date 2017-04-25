@@ -3,9 +3,9 @@ define(['firebase'], function(fb) {
 	
 	function Firebase() {
 		var firebaseConfig = {
-			apiKey: "AIzaSyAXbI6xPwhwR_S8WA-TcjrOczZ-ThJ7l4U",
-			authDomain: "goalsapp-7f7a5.firebaseapp.com",
-			databaseURL: "https://goalsapp-7f7a5.firebaseio.com",
+			apiKey: window.localStorage.getItem('api_key'),
+			authDomain: window.localStorage.getItem('auth_domain'),
+			databaseURL: window.localStorage.getItem('db_url'),
 			storageBucket: "",
 		};
 		
