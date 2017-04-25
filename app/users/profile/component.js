@@ -1,8 +1,8 @@
-define([], function(Controller) {
+define(['app/users/profile/controller'], function(Controller) {
 	'use strict';
 	
 	return {
-		template: 'app/users/profile.html',
+		templateUrl: 'app/users/profile/template.html',
 		controller: Controller,
 		bindings: {
 			model: '<'
