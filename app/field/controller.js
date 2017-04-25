@@ -23,6 +23,13 @@ define(function(require) {
 		
 		ctrl.msg = '';
 		
+		ctrl.val = function(newValue) {
+			if (newValue) {
+				this.model.set(ctrl.fid, newValue);
+			}
+			return this.model.get(ctrl.fid);
+		};
+		
 		ctrl.$onInit = function() {
 			if (!ctrl.type && ctrl.options.type) {
 				ctrl.type = ctrl.options.type

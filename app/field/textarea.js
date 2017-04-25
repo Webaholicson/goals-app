@@ -11,7 +11,7 @@ define(function(require) {
 		
 		TextareaField.element = $('\
 			<div class="form-group" ng-class="{\'has-error\': $ctrl.invalid}"> \
-				<textarea ng-model="$ctrl.model[$ctrl.fid]"></textarea> \
+				<textarea ng-model-options="{ getterSetter: true }" ng-model="$ctrl.val"></textarea> \
 				<span \
 					ng-show="$ctrl.invalid" \
 					class="help-block"> \

@@ -13,7 +13,7 @@ define(function(require) {
 		
 		this.element = $('\
 			<div class="form-group" ng-class="{\'has-error\': $ctrl.invalid}"> \
-				<input ng-model="$ctrl.model[$ctrl.fid]"/> \
+				<input ng-model-options="{ getterSetter: true }" ng-model="$ctrl.val"/> \
 				<span \
 					ng-show="$ctrl.invalid" \
 					class="help-block"> \
