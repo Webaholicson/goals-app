@@ -3,7 +3,7 @@ define(function() {
 	
 	function UserModel(Model) {
 		Model.init('User', 'users', { 
-			_fields: ['first_name', 'last_name', 'email', 'password']
+			_fields: ['first_name', 'last_name', 'email', 'location', 'bio']
 		});
 		
 		return Model;

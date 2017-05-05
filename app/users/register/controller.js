@@ -45,27 +45,27 @@ define(function(require) {
 			}
 			
 			$user.register(
-				ctrl.model['email'],
-				ctrl.model['password']
+				ctrl.model.get('email'),
+				ctrl.model.get('password')
 			).then(function(value) {
-		  		ctrl.model.save(function(res) {
+		  		ctrl.model.set('id', value.uid).save(function(res) {
 					btn.button('reset');
 					$location.url('/login');
 					$scope.$apply();
 				}, function(error) {
-					ctrl.registerClass		= 'alert-danger';
-					ctrl.registerMsg		= error.message;
+					ctrl.registerClass = 'alert-success';
+					ctrl.registerMsg   = error.message;
 					$scope.$apply();
 					btn.button('reset');
-				}, $user.getCurrentUser().uid);
+				}, value.uid);
 			}, function(error) {
-				ctrl.registerClass		= 'alert-danger';
-				ctrl.registerMsg		= error.message;
-				ctrl.displayMsg			= true;
+				ctrl.registerClass  = 'alert-danger';
+				ctrl.registerMsg    = error.message;
+				ctrl.displayMsg     = true;
 				$scope.$apply();
 				btn.button('reset');
 			});
-		};
+		}
 	}
 	
 	Controller.$inject = ['$scope', '$user', '$location', 'UserModel'];

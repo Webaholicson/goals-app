@@ -54,9 +54,8 @@ define(function(require) {
 				
 				return;
 			}
-			
+            
 			ctrl.model.save(function(res) {
-				console.log(res);
 				ctrl.resultClass	= 'alert-success';
 				ctrl.resultMsg		= 'Your profile has been updated.';
 				ctrl.displayMsg 	= true;

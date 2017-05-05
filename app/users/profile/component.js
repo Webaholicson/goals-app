@@ -5,7 +5,7 @@ define(['app/users/profile/controller'], function(Controller) {
 		templateUrl: 'app/users/profile/template.html',
 		controller: Controller,
 		bindings: {
-			model: '<'
+			user: '<'
 		}
 	}
 })

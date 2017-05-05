@@ -1,15 +1,39 @@
-<div id="forgot_password" class="page row">
-	<form name="login_form" class="col-xs-12">
-		<h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Forgot Password</h4>
-		<hr/>
-		<div class="form-group" ng-class="{'has-error': loginAttempted && (login_form.email.$error.email || login_form.email.$error.required)}">
-			<input type="email" class="form-control" ng-required="true" name="email" ng-model="data.email" placeholder="Email">
-		</div>
+<div id="forgot_password" class="row">
+    <form novalidate name="forgot_password_form" class="col-xs-12">
+        <h4>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+            Forgot Password
+        </h4>
+        <hr/>
+        
+    	<div 
+            ng-class="$ctrl.resultClass" 
+            ng-show="$ctrl.displayMsg" 
+            ng-bind="$ctrl.resultMsg" 
+            class="alert" 
+            role="alert"
+        ></div>
+	
+		<gt-field 
+			ng-repeat="(fid, field) in $ctrl.fields" 
+			fid="fid" 
+			options="field"
+			model="$ctrl.model"
+			on-init-field="$ctrl.addField(fieldModel)"
+		></gt-field>
+	
 		<div class="form-group text-center">
-			<button name="sbmt" type="submit" data-loading-text="Submitting..." class="btn btn-default" ng-click="$ctrl.register(register_form, $event)">Submit</button>
+			<button 
+                name="sbmt" 
+                type="submit" 
+                data-loading-text="Submitting..." 
+                class="btn btn-default" 
+                ng-click="$ctrl.lookup(forgot_password_form, $event)"
+            >Submit</button>
 		</div>
+        
 		<div class="form-group text-center">
 			<p><a href="/login">Login</a></p>
 		</div>
-	</form>
+   </form>
 </div>
