@@ -44,6 +44,13 @@ define(function() {
 				if (!Object.keys(this._data).length) {
 					throw 'InvalidData';
 				}
+                
+                var data = this._data;
+                for (var k in this._data) {
+                    if (this._fields.indexOf(k) === -1 && k !== 'id') {
+                        delete data[k];
+                    }
+                }
 				
 				if (!this._ref) {
 					this._ref = $firebase.database().ref(this._refName);
@@ -55,7 +62,7 @@ define(function() {
 				}
 				
 				var that = this;
-				this._ref.set(this._data)
+				this._ref.set(data)
 					.then(function(res) {
 						that._saved = true;
 						if (onSuccess) onSuccess(res);
@@ -88,9 +95,13 @@ define(function() {
 			},
 			
 			set: function(key, value) {
-				if (!key || (!value && typeof key !== 'object')) {
+				if (!key) {
 					throw 'InvalidParams';
 				}
+                
+                if (typeof key !== 'object' && typeof value === 'undefined') {
+                    value = '';
+                }
 				
 				if (key === 'id') {
 					this._id = value;
@@ -99,19 +110,8 @@ define(function() {
 				}
 				
 				if (typeof key === 'object') {
-					for (var k in key) {
-						if (this._fields.indexOf(k) === -1) {
-							throw 'InvalidProperty';
-						}
-						
-						this._data[k] = key[k];
-					}
-					
+					this._data = key;
 					return this;
-				}
-				
-				if (this._fields.indexOf(key) === -1) {
-					throw 'InvalidProperty';
 				}
 				
 				this._data[key] = value;
@@ -119,6 +119,20 @@ define(function() {
 				return this;
 			},
 			
+            unset: function(key) {
+                if (!key) {
+                    throw 'InvalidParams';
+                }
+                
+                if (this._data[key]) {
+                    delete this._data[key];
+                } else {
+                    throw 'InvalidProperty';
+                }
+                
+                return this;
+            },
+            
 			get: function(key) {
 				if (!key) {
 					return this._data;

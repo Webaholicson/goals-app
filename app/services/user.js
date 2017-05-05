@@ -34,7 +34,7 @@ define(function() {
 			
 			/**
 			 * Retrieves the current user id
-			 * @return {firebase.User|null}
+			 * @return {firebase.User|Object}
 			 */
 			getCurrentUser: function() {
 				if (this.currentUser.uid) {
