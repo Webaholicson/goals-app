@@ -8,6 +8,8 @@ define(function(require) {
 	
 	var Controller = function($scope, $compile) {
 		
+        var _val = '';
+        
 		var ctrl = this;
 		
 		var validationMsg = {
@@ -24,10 +26,11 @@ define(function(require) {
 		ctrl.msg = '';
 		
 		ctrl.val = function(newValue) {
-			if (newValue) {
-				this.model.set(ctrl.fid, newValue);
+			if (arguments.length) {
+				ctrl.model.set(ctrl.fid, newValue);
 			}
-			return this.model.get(ctrl.fid);
+            
+			return ctrl.model.get(ctrl.fid);
 		};
 		
 		ctrl.$onInit = function() {

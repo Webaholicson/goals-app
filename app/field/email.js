@@ -5,7 +5,7 @@ define(function(require) {
 		var Field = require('app/field/field');
 		var EmailField = new Field();
 		
-		EmailField.type = 'email';
+		EmailField.type = 'text';
 		return EmailField;
 	}
 })
