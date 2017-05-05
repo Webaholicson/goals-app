@@ -44,7 +44,7 @@ define(function() {
 		});
 		
 		$routeProvider.when('/profile', {
-			template: '<gt-profile model="$resolve.user"></gt-profile>',
+			template: '<gt-profile user="$resolve.user"></gt-profile>',
 			resolve: {
 				user: function(UserModel, $user) {
 					var user = $user.getCurrentUser();
