@@ -60,14 +60,19 @@ define(function() {
 				var parent = this;
 				return $firebase.auth()
 					.signInWithEmailAndPassword(email, password)
-					.then(function(value) {
+					.then(function(user) {
+                        if (!user.emailVerified) {
+                            return;
+                        }
+                        
 						$window.localStorage.setItem(
 							'isLoggedIn', 
 							true
 						);
 						
-						parent.currentUser.uid = value.uid;
-						parent.currentUser.email = value.email;
+						parent.currentUser.uid = user.uid;
+						parent.currentUser.email = user.email;
+                        parent.currentUser.isVerified = user.emailVerified;
 						
 						$window.localStorage.setItem(
 							'currentUser', 
@@ -86,8 +91,20 @@ define(function() {
 			 * @return {firebase.Promise}
 			 */
 			register: function(email, password) {
+                var parent = this;
 				return $firebase.auth()
-					.createUserWithEmailAndPassword(email, password);
+					.createUserWithEmailAndPassword(email, password)
+                    .then(function(user) {
+                        user.sendEmailVerification();
+                        
+                        parent.currentUser.uid = user.uid;
+						parent.currentUser.email = user.email;
+						
+						$window.localStorage.setItem(
+							'currentUser', 
+							JSON.stringify(parent.currentUser)
+						);
+                    });
 			},
 			
 			/**

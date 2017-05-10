@@ -79,7 +79,7 @@ define(function() {
 				this._ref = $firebase.database().ref(this._refName+'/'+id);
 				return this._ref.once('value')
 					.then(function(data) {
-						if (data) {
+						if (data.val()) {
 							that._data = data.val();
 							that._id = id;
 						}
@@ -138,7 +138,9 @@ define(function() {
 					return this._data;
 				}
 				
-				return this._data[key] || null;
+                if (Object.keys(this._data).indexOf(key) !== -1) {
+                    return this._data[key];
+                }
 			},
 			
 			getFields: function() {
