@@ -1,17 +1,37 @@
 <div id="login" class="row">
 	<form name="login_form" class="col-xs-12">
-		<h4><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Login</h4>
+		<h4>
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 
+            Login
+        </h4>
 		<hr/>
-		<div class="form-group" ng-class="{'has-error': $ctrl.loginAttempted && (login_form.email.$error.email || login_form.email.$error.required)}">
-			<input type="email" class="form-control" ng-required="true" name="email" ng-model="$ctrl.data.email" placeholder="Email">
-		</div>
-		<div class="form-group" ng-class="{'has-error': $ctrl.loginAttempted && login_form.password.$error.required}">
-			<input type="password" ng-required="true" name="password" class="form-control" ng-model="$ctrl.data.password" placeholder="Password">
-		</div>
+        
+        <div 
+            ng-class="$ctrl.resultClass" 
+            ng-show="$ctrl.displayMsg" 
+            ng-bind="$ctrl.resultMsg" 
+            class="alert" 
+            role="alert">
+        </div>
+		
+        <gt-field 
+			ng-repeat="(fid, field) in $ctrl.fields" 
+			fid="fid" 
+			options="field"
+			model="$ctrl.model"
+			on-init-field="$ctrl.addField(fieldModel)"
+		></gt-field>
+        
 		<div class="form-group text-center">
-			<button name="sbmt" type="submit" data-loading-text="Authenticating..." class="btn btn-default" ng-click="$ctrl.authenticate(login_form, $event)">Submit</button>
+			<button 
+                name="sbmt" 
+                type="submit" 
+                data-loading-text="Authenticating..." 
+                class="btn btn-default" 
+                ng-click="$ctrl.authenticate(login_form, $event)">
+                Submit
+            </button>
 		</div>
-		<div ng-class="$ctrl.loginClass" ng-show="$ctrl.displayMsg" ng-bind="$ctrl.loginMsg" class="alert" role="alert"></div>
 		<div class="form-group text-center">
 			<p><a href="/register">Register</a></p>
 			<p><a href="/forgot-password">Forgot password?</a></p>

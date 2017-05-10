@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+    <div class="panel-heading">{{$ctrl.heading}}</div>
+    <div class="panel-body">
+        <form novalidate name="profile_form">
+            <gt-field 
+                ng-repeat="(fid, field) in $ctrl.fields" 
+                fid="fid" 
+                options="field"
+                model="$ctrl.model"
+                on-init-field="$ctrl.addField(fieldModel)"
+            ></gt-field>
+
+            <div class="form-group text-center">
+                <button 
+                    name="sbmt" 
+                    type="submit" 
+                    data-loading-text="Saving..." 
+                    class="btn btn-default" 
+                    ng-click="$ctrl.save(profile_form, $event)"
+                >Save</button>
+            </div>
+        </form>
+    </div>
+</div>

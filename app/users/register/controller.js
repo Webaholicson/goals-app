@@ -47,17 +47,20 @@ define(function(require) {
 			$user.register(
 				ctrl.model.get('email'),
 				ctrl.model.get('password')
-			).then(function(value) {
-		  		ctrl.model.set('id', value.uid).save(function(res) {
+			).then(function() {
+                btn.button('reset');
+                $location.url('/login?registered=1');
+                $scope.$apply();
+		  		/* ctrl.model.set('id', user.uid).save(function(res) {
 					btn.button('reset');
-					$location.url('/login');
+					$location.url('/login?registered=1');
 					$scope.$apply();
 				}, function(error) {
-					ctrl.registerClass = 'alert-success';
+					ctrl.registerClass = 'alert-danger';
 					ctrl.registerMsg   = error.message;
 					$scope.$apply();
 					btn.button('reset');
-				}, value.uid);
+				}, value.uid); */
 			}, function(error) {
 				ctrl.registerClass  = 'alert-danger';
 				ctrl.registerMsg    = error.message;

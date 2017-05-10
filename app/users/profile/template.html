@@ -1,27 +1,16 @@
 <div id="profile" class="row">
-	<gt-card title="{{$ctrl.title}}">
-		
-		<div ng-class="$ctrl.resultClass" ng-show="$ctrl.displayMsg" ng-bind="$ctrl.resultMsg" class="alert" role="alert"></div>
-		
-		<form novalidate name="profile_form">
-			<gt-field 
-				ng-repeat="(fid, field) in $ctrl.fields" 
-				fid="fid" 
-				options="field"
-				model="$ctrl.model"
-				on-init-field="$ctrl.addField(fieldModel)"
-			></gt-field>
-			
-			<div class="form-group text-center">
-				<button 
-					name="sbmt" 
-					type="submit" 
-					data-loading-text="Saving..." 
-					class="btn btn-default" 
-					ng-click="$ctrl.save(profile_form, $event)">
-					Save
-				</button>
-			</div>
-		</form>
-	</gt-card>
+    <gt-card title="{{$ctrl.title}}">
+        
+        <div 
+            ng-class="$ctrl.resultClass" 
+            ng-show="$ctrl.displayMsg" 
+            ng-bind="$ctrl.resultMsg" 
+            class="alert" role="alert"
+        ></div>
+        
+        <gt-user-info model=$ctrl.model on-update=$ctrl.onUpdate(section)></gt-user-info>
+        
+        <gt-auth-info model=$ctrl.model on-update=$ctrl.onUpdate(section)></gt-auth-info>
+        
+    </gt-card>
 </div>

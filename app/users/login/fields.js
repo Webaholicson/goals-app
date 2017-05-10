@@ -3,34 +3,34 @@ define(function() {
 	
 	return function() {
 		return {
-			'first_name': {
+			'email': {
 				'attr': {
-					'placeholder': 'First Name',
+					'placeholder': 'Email',
 					'value': '',
 					'class': 'form-control ',
-					'id': 'first_name',
-					'name': 'first_name',
+					'id': 'email',
+					'name': 'email',
 				},
 				'validation': {
 					'required': true,
 					'trim': true,
 				},
-				'type': 'text'
+				'type': 'email'
 			},
-			'last_name': {
+			'password': {
 				'attr': {
-					'placeholder': 'Last Name',
+					'placeholder': 'Password',
 					'value': '',
 					'class': 'form-control ',
-					'id': 'last_name',
-					'name': 'last_name',
+					'id': 'password',
+					'name': 'password',
 				},
 				'validation': {
 					'required': true,
 					'trim': true,
 				},
-				'type': 'text'
-			},
+				'type': 'password'
+			}
 		}
 	}
 })

@@ -1,9 +1,18 @@
 <div id="register" class="row">
 	<form novalidate name="register_form" class="col-xs-12">
-		<h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</h4>
+		<h4>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+            Register
+        </h4>
 		<hr/>
 		
-		<div ng-class="$ctrl.registerClass" ng-show="$ctrl.displayMsg" ng-bind="$ctrl.registerMsg" class="alert" role="alert"></div>
+		<div 
+            ng-class="$ctrl.registerClass" 
+            ng-show="$ctrl.displayMsg" 
+            ng-bind="$ctrl.registerMsg" 
+            class="alert" 
+            role="alert">
+        </div>
 		
 		<gt-field 
 			ng-repeat="(fid, field) in $ctrl.fields" 
@@ -14,7 +23,14 @@
 		></gt-field>
 		
 		<div class="form-group text-center">
-			<button name="sbmt" type="submit" data-loading-text="Saving..." class="btn btn-default" ng-click="$ctrl.register(register_form, $event)">Submit</button>
+			<button 
+                name="sbmt" 
+                type="submit" 
+                data-loading-text="Saving..." 
+                class="btn btn-default" 
+                ng-click="$ctrl.register(register_form, $event)">
+                Submit
+            </button>
 		</div>
 		
 		<div class="form-group text-center">

@@ -31,33 +31,36 @@ define(function() {
 				},
 				'type': 'text'
 			},
-			'email': {
+            'location': {
 				'attr': {
-					'placeholder': 'Email',
+					'placeholder': 'Location',
 					'value': '',
 					'class': 'form-control ',
-					'id': 'email',
-					'name': 'email',
+					'id': 'location',
+					'name': 'location',
 				},
-				'validation': {
-					'required': true,
-					'trim': true,
-				},
-				'type': 'email'
+				'type': 'text'
 			},
-			'password': {
+            'dob': {
 				'attr': {
-					'placeholder': 'Password',
+					'placeholder': 'Date of Birth',
 					'value': '',
 					'class': 'form-control ',
-					'id': 'password',
-					'name': 'password',
+					'id': 'dob',
+					'name': 'dob',
 				},
-				'validation': {
-					'trim': true,
+				'type': 'date'
+			},
+            'bio': {
+				'attr': {
+					'placeholder': 'Bio',
+					'value': '',
+					'class': 'form-control ',
+					'id': 'bio',
+					'name': 'bio',
 				},
-				'type': 'password'
-			}
+				'type': 'textarea'
+			},
 		}
 	}
 })

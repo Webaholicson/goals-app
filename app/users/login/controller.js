@@ -1,66 +1,83 @@
-define([], function() {
-	'use strict';
-	
-	var Controller = function($scope, $location, $user) {
-		
-		var ctrl = this;
-		
-	    ctrl.user = {};
-		
-	    ctrl.data = {};
-		
-		ctrl.loginClass = '';
-		
-	    ctrl.loginMsg = '';
-		
-	    ctrl.displayMsg = false;
-		
-	    ctrl.loginAttempted = false;
-		
-	    ctrl.authenticate = function(form, $event) {
-			ctrl.loginAttempted = true;
+define(function(require) {
+    'use strict';
 
-			if (!form.$valid) {
-				return false;
-			}
-			
-			var btn = angular.element(event.target).button('loading');
-			
-			$user.authenticate(
-				ctrl.data['email'],
-				ctrl.data['password']	
-			).then(function(value) {
-				ctrl.user = angular.copy(ctrl.data);
-				ctrl.reset();
-				ctrl.$appctrl.login();
-				$location.url('/dashboard');
-				$scope.$apply();
-			}, function(reason) {
-				ctrl.loginClass		= 'alert-danger';
-				ctrl.loginMsg		= 'Invalid username or password.';
-				ctrl.displayMsg		= true;
-				$scope.$apply();
-				btn.button('reset');
-			});
-		};
-		
-		ctrl.reset = function(form, btn) {
-			if (form) {
-				form.$setPristine();
-				form.$setUntouched();
-			}
+    var ng			= require('angular.min');
+    var FieldList	= require('app/users/login/fields');
 
-			if (btn) {
-				btn.button('reset');
-			}
+    var Controller = function($scope, $location, $user, UserModel) {
 
-			ctrl.displayMsg = false;
-			ctrl.data = {};
-			ctrl.user = {};
-		};
-	}
-	
-	Controller.$inject = ['$scope', '$location', '$user'];
-	
-	return Controller;
+        var ctrl = this;
+
+        ctrl.resultClass = '';
+
+        ctrl.resultMsg = '';
+
+        ctrl.displayMsg = false;
+
+        ctrl.fieldModels = {};
+
+        ctrl.model = UserModel;
+
+        ctrl.fields = new FieldList();
+
+        ctrl.addField = function(field) {
+            ctrl.fieldModels[field.fid] = field
+        }
+
+        ctrl.$onInit = function() {
+            if ($user.getCurrentUser().uid && $location.search().registered) {
+                ctrl.resultClass    = 'alert-success';
+                ctrl.resultMsg      = 'An email verification has been sent to your email.';
+                ctrl.displayMsg     = true;
+            }
+        }
+
+        ctrl.authenticate = function(form, $event) {
+            var btn = angular.element(event.target).button('loading');
+
+            if (!form.$valid) {
+                btn.button('reset');
+                ng.forEach(ctrl.fieldModels, function(v) {
+                    v.invalid = false;
+                    v.msg = '';
+                });
+
+                ng.forEach(form.$error, function(v, err) {
+                    ng.forEach(v, function(field) {
+                        ctrl.fieldModels[field.$name].invalidate(err);
+                        return;
+                    });
+                });
+
+                return;
+            }
+
+            $user.authenticate(
+                ctrl.model.get('email'),
+                ctrl.model.get('password')
+            ).then(function() {
+                if ($user.isLoggedIn) {
+                    ctrl.$appctrl.login();
+                    $location.url('/dashboard');
+                    $scope.$apply();
+                } else {
+                    ctrl.resultClass	= 'alert-danger';
+                    ctrl.resultMsg		= 'Your email has not yet been verified.';
+                    ctrl.displayMsg		= true;
+                    btn.button('reset');
+                    $scope.$apply();
+                }
+            }, function(error) {
+                ctrl.resultClass	= 'alert-danger';
+                ctrl.resultMsg		= error.message;
+                ctrl.displayMsg		= true;
+                $scope.$apply();
+                btn.button('reset');
+            });
+        }
+    }
+
+    Controller.$inject = ['$scope', '$location', '$user', 'UserModel'];
+
+    return Controller;
 });
