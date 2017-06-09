@@ -47,7 +47,7 @@ define(function(require) {
 		};
 		
 		this.setupAttributes = function(options) {
-			var input	= this.element.find(this.tagName);
+			var input	= this.element.find(this.tagName).first();
 			var span	= this.element.find('span');
 			
 			for (var key in options) {
@@ -61,7 +61,7 @@ define(function(require) {
 		};
 		
 		this.setupValidation = function(options) {
-			var input = this.element.find(this.tagName);
+			var input = this.element.find(this.tagName).first();
 			
 			for (var key in options) {
 				if (key === 'trim' || key === 'required') {

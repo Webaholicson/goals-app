@@ -58,29 +58,32 @@ define(function() {
 			 */
 			authenticate: function(email, password) {
 				var parent = this;
-				return $firebase.auth()
-					.signInWithEmailAndPassword(email, password)
-					.then(function(user) {
-                        if (!user.emailVerified) {
-                            return;
-                        }
-                        
-						$window.localStorage.setItem(
-							'isLoggedIn', 
-							true
-						);
-						
-						parent.currentUser.uid = user.uid;
-						parent.currentUser.email = user.email;
-                        parent.currentUser.isVerified = user.emailVerified;
-						
-						$window.localStorage.setItem(
-							'currentUser', 
-							JSON.stringify(parent.currentUser)
-						);
-						
-						parent.isLoggedIn = true;
-					});
+				var res = $firebase.auth()
+					.signInWithEmailAndPassword(email, password);
+				
+                res.then(function(user) {
+                    if (!user.emailVerified) {
+                        return;
+                    }
+                    
+					$window.localStorage.setItem(
+						'isLoggedIn', 
+						true
+					);
+					
+					parent.currentUser.uid = user.uid;
+					parent.currentUser.email = user.email;
+                    parent.currentUser.isVerified = user.emailVerified;
+					
+					$window.localStorage.setItem(
+						'currentUser', 
+						JSON.stringify(parent.currentUser)
+					);
+					
+					parent.isLoggedIn = true;
+				});
+                
+                return res;
 			},
 			
 			/**
@@ -119,6 +122,27 @@ define(function() {
 					parent.isLoggedIn = false;
 				});
 			},
+            
+            /**
+			 * Update the users credential on firebase
+			 * 
+			 * @param {String} email - Users email address
+			 * @param {String} pass - Users current password
+             * @param {String} pass - Users new password
+			 * @return {firebase.Promise}
+			 */
+            updateCredentials: function(email, pass, new_pass, success, error) {
+                return $firebase.auth()
+					.signInWithEmailAndPassword(email, pass)
+                    .then(function(user) {
+                        var cred = $firebase.Auth.EmailAuthProvider.credential(
+                            email,
+                            new_pass
+                        );
+                        
+                        return user.reauthenticateWithCredential(cred);
+                    });
+            }
 		}
 	};
 	

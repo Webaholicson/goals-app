@@ -1,8 +1,8 @@
 define(function(require) {
 	'use strict';
 	
-	var ng			= require('angular.min');
-	var FieldList	= require('app/users/register/fields');
+	var ng             = require('angular.min');
+	var FieldList      = require('app/users/register/fields');
 	
 	var Controller = function($scope, $user, $location, UserModel) {
 		

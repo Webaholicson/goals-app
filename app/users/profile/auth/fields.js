@@ -10,22 +10,34 @@ define(function() {
 					'class': 'form-control ',
 					'id': 'email',
 					'name': 'email',
+                    'readonly': true,
 				},
 				'validation': {
 					'required': true,
 					'trim': true,
 				},
-				'type': 'email'
+				'type': 'email',
+			},
+            'current_password': {
+				'attr': {
+					'placeholder': 'Current Password',
+					'value': '',
+					'class': 'form-control ',
+					'id': 'current_password',
+					'name': 'current_password',
+				},
+				'type': 'password',
 			},
 			'password': {
 				'attr': {
-					'placeholder': 'Password',
+					'placeholder': 'New Password',
 					'value': '',
 					'class': 'form-control ',
 					'id': 'password',
 					'name': 'password',
 				},
-				'type': 'password'
+				'type': 'password',
+                'confirm': true,
 			},
 		}
 	}

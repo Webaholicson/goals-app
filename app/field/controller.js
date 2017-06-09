@@ -12,14 +12,17 @@ define(function(require) {
         
 		var ctrl = this;
 		
-		var validationMsg = {
-			'required': 	'This field is required',
-			'minlength': 	'The minimum length for this field is %d',
-			'maxlength':	'The maximum length for this field is %d',
-			'email': 		'Please enter a valid email address.'
-		};
+        var validationMsg = {
+            'required':          'This field is required',
+            'minlength':         'The minimum length for this field is %d',
+            'maxlength':         'The maximum length for this field is %d',
+            'email':             'Please enter a valid email address.',
+            'password_match':  'The password fields do not match.',
+        };
 		
 		var rendered = false;
+        
+        var field = null;
 		
 		ctrl.invalid = false;
 		
@@ -32,6 +35,8 @@ define(function(require) {
             
 			return ctrl.model.get(ctrl.fid);
 		};
+        
+        ctrl.confirmVal = null;
 		
 		ctrl.$onInit = function() {
 			if (!ctrl.type && ctrl.options.type) {
@@ -52,8 +57,6 @@ define(function(require) {
 		};
 		
 		ctrl.render = function() {
-			var field;
-			
 			switch (ctrl.options.type) {
 				case 'text':
 					field = new TextField();
@@ -77,6 +80,7 @@ define(function(require) {
 		};
 		
 		ctrl.invalidate = function(error) {
+            //field.invalidate(error);
 			ctrl.invalid = true;
 			ctrl.msg = validationMsg[error];
 		};
