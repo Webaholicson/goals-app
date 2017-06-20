@@ -4,7 +4,7 @@ define(function(require) {
     var ng			= require('angular.min');
     var FieldList	= require('app/users/profile/auth/fields');
 
-    var Controller = function($scope, $user, $firebase, UserModel) {
+    var Controller = function($scope, $user, $firebase) {
 
         var ctrl = this;
 
@@ -76,7 +76,7 @@ define(function(require) {
         }
     }
 	
-	Controller.$inject = ['$scope', '$user', '$firebase', 'UserModel'];
+	Controller.$inject = ['$scope', '$user', '$firebase'];
 	
 	return Controller;
 });

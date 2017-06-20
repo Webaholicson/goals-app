@@ -4,7 +4,7 @@ define(function(require) {
     var ng			= require('angular.min');
     var FieldList	= require('app/users/profile/info/fields');
 
-    var Controller = function($scope, $user, UserModel) {
+    var Controller = function($scope, $user) {
 
         var ctrl = this;
 
@@ -52,7 +52,7 @@ define(function(require) {
 		}
 	}
 	
-	Controller.$inject = ['$scope', '$user', 'UserModel'];
+	Controller.$inject = ['$scope', '$user'];
 	
 	return Controller;
 });
