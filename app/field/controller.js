@@ -17,7 +17,7 @@ define(function(require) {
             'minlength':         'The minimum length for this field is %d',
             'maxlength':         'The maximum length for this field is %d',
             'email':             'Please enter a valid email address.',
-            'password_match':  'The password fields do not match.',
+            'password_match':    'The password fields do not match.',
         };
 		
 		var rendered = false;
@@ -28,15 +28,19 @@ define(function(require) {
 		
 		ctrl.msg = '';
 		
+        ctrl.confirmVal = null;
+        
 		ctrl.val = function(newValue) {
 			if (arguments.length) {
 				ctrl.model.set(ctrl.fid, newValue);
 			}
             
+            if (!ctrl.model) {
+                return '';
+            }
+            
 			return ctrl.model.get(ctrl.fid);
-		};
-        
-        ctrl.confirmVal = null;
+		}
 		
 		ctrl.$onInit = function() {
 			if (!ctrl.type && ctrl.options.type) {
@@ -44,7 +48,7 @@ define(function(require) {
 			}
 			
 			ctrl.onInitField({fieldModel: ctrl});
-		};
+		}
 		
 		ctrl.$doCheck = function() {
 			var element = $('#field-'+ctrl.fid);
@@ -54,7 +58,7 @@ define(function(require) {
 				$compile(element)($scope);
 				rendered = true;
 			}
-		};
+		}
 		
 		ctrl.render = function() {
 			switch (ctrl.options.type) {
@@ -77,14 +81,24 @@ define(function(require) {
 			}
 			
 			return '';
-		};
+		}
 		
 		ctrl.invalidate = function(error) {
             //field.invalidate(error);
 			ctrl.invalid = true;
 			ctrl.msg = validationMsg[error];
-		};
+		}
 		
+        ctrl.reset = function() {
+            ctrl.invalid = false;
+    		ctrl.msg = '';
+            ctrl.confirmVal = null;
+            ctrl.val('');
+        }
+        
+        ctrl.$onDestroy = function() {
+            ctrl.reset();
+        }
 	}
 	
 	Controller.$inject = ['$scope', '$compile'];
