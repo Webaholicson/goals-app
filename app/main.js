@@ -15,6 +15,7 @@ define(function(require) {
 
     // Models
     var UserModel           = require('app/users/user');
+    var GoalModel           = require('app/goal/goal');
 
     // Helpers
     var StringHelper        = require('app/helpers/string');
@@ -42,6 +43,7 @@ define(function(require) {
         .factory('$model', ModelSrvc)
         .factory('$string', StringHelper)
         .factory('UserModel', UserModel)
+        .factory('GoalModel', GoalModel)
         .component('gtApp', gtApp)
         .component('gtNav', gtNav)
         .component('gtNavItem', gtNavItem)

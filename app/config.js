@@ -31,10 +31,9 @@ define(function() {
 		
 		$routeProvider.when('/goal/edit/:goalid', {
 			template: '<gt-goal-edit goal="$resolve.goal"></gt-goal-edit>',
-			resolve: {
-				goal: function($firebase, $route) {
-					return $firebase.database()
-						.ref('goals/'+$route.current.params.goalid)
+            resolve: {
+				goal: function(GoalModel, $route) {
+					return GoalModel.find($route.current.params.goalid);
 				}
 			}
 		});

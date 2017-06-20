@@ -1,9 +1,10 @@
 define(function(require) {
 	'use strict';
 	
-	var ng = require('angular.min');
+    var ng			= require('angular.min');
+    var FieldList	= require('app/goal/edit/fields');
 	
-	var Controller = function($firebase, $string, $scope) {
+	var Controller = function($location, $string, $scope, GoalModel) {
     	
 		var ctrl = this;
 		
@@ -14,34 +15,10 @@ define(function(require) {
 		ctrl.goalMessage = '';
 		
 		ctrl.fieldModels = {};
+        
+        ctrl.model = GoalModel;
 		
-		ctrl.fields = {
-			'title': {
-				'type': 'text',
-				'attr': {
-					'placeholder': 'Title',
-					'value': '',
-					'class': 'form-control ',
-					'id': 'title',
-					'name': 'title',
-				},
-				'validation': {
-					'required': true,
-					'trim': true,
-				},
-			},
-			
-			'description': {
-				'type': 'textarea',
-				'attr': {
-					'placeholder': 'Description',
-					'class': 'form-control ',
-					'id': 'description',
-					'name': 'description',
-					'rows': "5",
-				}
-			}
-		};
+		ctrl.fields = new FieldList();
 		
 		ctrl.addField = function(fieldModel) {
 			ctrl.fieldModels[fieldModel.fid] = fieldModel;
@@ -50,21 +27,17 @@ define(function(require) {
 		ctrl.$onInit = function() {
 			if (ctrl.goal && ctrl.goal.path) {
 				ctrl.goal.once('value').then(function(goal) {
-					ctrl.goal = goal.val();
-					ctrl.title = 'Edit Goal: ' + ctrl.goal.title;
-					$scope.$apply();
-				});
+					ctrl.title = 'Edit Goal: ' + goal.title;
+                    ctrl.model.set(goal.val());
+                    $scope.$apply();
+				}).catch(function() {
+                    $location.url('/goal/edit');
+                    $scope.$apply();
+                });
 				
 				return;
 			}
-			
-			ctrl.goal = {
-				id: null,
-				title: '',
-				description: '',
-				schedule: {},
-			};
-		};
+		}
 		
 		ctrl.saveGoal = function(form) {
 			if (!form.$valid) {
@@ -87,30 +60,26 @@ define(function(require) {
 				return;
 			}
 			
-			if (!ctrl.goal.id) {
-				ctrl.goal.id = $string.slugify(ctrl.goal.title);
-				var goal = $firebase.database().ref('goals/'+ctrl.goal.id);
-				goal.set(ctrl.goal).then(function() {
+			if (!ctrl.model.get('id')) {
+				ctrl.model.set('id', $string.slugify(ctrl.model.get('title')));
+				ctrl.model.save(function() {
 					ctrl.goalSaved = true;
 					ctrl.goalMessage = 'Goal saved!';
+                    document.getElementsByTagName('form')[0].reset();
 					form.$setPristine();
 					form.$setUntouched();
-					document.getElementsByTagName('form')[0].reset();
 					$scope.$apply();
-				}).catch(function(error) {
+				}, function(error) {
 					ctrl.goalMessage = 'Goal not saved: '+error;
 					$scope.$apply();
 				});
 				
 				return;
 			}
-			
-			var goal = $firebase.database().ref('goals/'+ctrl.goal.id);
-			goal.set(ctrl.goal);
-		};
+		}
 	}
 	
-	Controller.$inject = ['$firebase', '$string', '$scope'];
+	Controller.$inject = ['$location', '$string', '$scope', 'GoalModel'];
 	
 	return Controller;
 });
