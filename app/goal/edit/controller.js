@@ -2,11 +2,14 @@ define(function(require) {
 	'use strict';
 	
     var ng			= require('angular.min');
+    var calendar    = require('fullcalendar.min');
     var FieldList	= require('app/goal/edit/fields');
 	
 	var Controller = function($location, $string, $scope, GoalModel) {
     	
 		var ctrl = this;
+        
+        var calRendered = false;
 		
 		ctrl.title = 'New Goal';
 		
@@ -25,6 +28,7 @@ define(function(require) {
 		};
 		
 		ctrl.$onInit = function() {
+            
 			if (ctrl.goal && ctrl.goal.path) {
 				ctrl.goal.once('value').then(function(goal) {
 					ctrl.title = 'Edit Goal: ' + goal.title;
@@ -38,6 +42,19 @@ define(function(require) {
 				return;
 			}
 		}
+        
+        ctrl.$doCheck = function() {
+            if (calRendered) {
+                return;
+            }
+            
+            var calEl = ng.element('#calendar');
+            
+            if (calEl.length) {
+                calEl.fullCalendar();
+                calRendered = true;
+            }
+        }
 		
 		ctrl.saveGoal = function(form) {
 			if (!form.$valid) {
@@ -79,7 +96,12 @@ define(function(require) {
 		}
 	}
 	
-	Controller.$inject = ['$location', '$string', '$scope', 'GoalModel'];
+	Controller.$inject = [
+        '$location', 
+        '$string', 
+        '$scope',  
+        'GoalModel'
+    ];
 	
 	return Controller;
 });

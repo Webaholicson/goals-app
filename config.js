@@ -33,5 +33,12 @@ require.config({
 			exports: 'bootstrap',
 			deps: ['jquery']
 		},
+        'moment': {
+            exports: 'moment',
+        },
+        'fullcalendar.min': {
+            exports: 'fullcalendar',
+            deps: ['jquery', 'moment']
+        },
 	}
 });

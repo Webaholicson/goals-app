@@ -13,41 +13,27 @@
 				<h5>Schedule</h5>
 				<hr />
 				<div id="schedule-box">
+                    <div id="calendar"></div>
 					<div class="form-group">
-						Schedule this goal 
-						<span class="schedule-box-selector">...</span>
-						<select name="main_interval">
-							<option value="every">every</option>
-							<option value="for">for</option>
-						</select>
-						<select name="date_part_every">
-							<option value="n-value">X</option>
-							<option value="day">day</option>
-							<option value="hour">hour</option>
-						</select>
-						<select name="date_part_for">
-							<option value="n-value">X</option>
-							<option value="weekdays">these weekdays</option>
-							<option value="weekdays">these hours</option>
-						</select>
-						<select name="date_part_nvalue">
-							<option value="day">day(s)</option>
-							<option value="hour">hour(s)</option>
-						</select>
-						<input type="text" name="start_date" 
-							placeholder="start date">
-						<select name="modifiers">
-							<option value="and">and</option>
-							<option value="unless">unless</option>
-							<option value="until">until</option>
-						</select>
-						<input type="text" name="start_date" 
-							placeholder="end date">
+						<input 
+                            type="text" 
+                            name="start_date" 
+							placeholder="start date" 
+                        />
+						
+                        <input 
+                            type="text" 
+                            name="end_date" 
+							placeholder="end date"
+                        />
 					</div>
 				</div>
 				
-				<button ng-click="$ctrl.saveGoal(edit_goal)" type="submit" 
-					class="btn btn-default">Save</button>
+				<button 
+                    ng-click="$ctrl.saveGoal(edit_goal)" 
+                    type="submit" 
+					class="btn btn-default"
+                >Save</button>
 			</form>
 			<br />
 			<div 
