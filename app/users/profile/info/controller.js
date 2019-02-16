@@ -17,9 +17,9 @@ define(function(require) {
         ctrl.addField = function(field) {
             ctrl.fieldModels[field.fid] = field
         }
-		
+
 		ctrl.save = function(form, $event) {
-			var btn = ng.element(event.target).button('loading');
+			var btn = ng.element($event.target).button('loading');
 			
 			if (!form.$valid) {
 				btn.button('reset');

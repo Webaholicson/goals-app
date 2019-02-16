@@ -19,7 +19,7 @@ define(function(require) {
 		
 		ctrl.fieldModels = {};
         
-        ctrl.model = GoalModel;
+        ctrl.model = GoalModel.init();
 		
 		ctrl.fields = new FieldList();
 		

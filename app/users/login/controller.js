@@ -33,7 +33,7 @@ define(function(require) {
         }
 
         ctrl.authenticate = function(form, $event) {
-            var btn = angular.element(event.target).button('loading');
+            var btn = angular.element($event.target).button('loading');
 
             if (!form.$valid) {
                 btn.button('reset');

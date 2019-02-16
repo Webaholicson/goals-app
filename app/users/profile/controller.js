@@ -13,11 +13,11 @@ define(function(require) {
 
         ctrl.displayMsg = false;
 
-        ctrl.model = UserModel;
+        ctrl.model = UserModel.init();
 
         ctrl.title = 'Profile';
 
-        ctrl.$onInit = function() {			
+        ctrl.$onInit = function() {
             if (ctrl.user) {
                 ctrl.user.once('value').then(function(user) {
                     ctrl.model.set(user.val());

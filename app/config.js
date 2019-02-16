@@ -33,7 +33,8 @@ define(function() {
 			template: '<gt-goal-edit goal="$resolve.goal"></gt-goal-edit>',
             resolve: {
 				goal: function(GoalModel, $route) {
-					return GoalModel.find($route.current.params.goalid);
+					return GoalModel.init()
+                        .reset().find($route.current.params.goalid);
 				}
 			}
 		});
@@ -47,7 +48,7 @@ define(function() {
 			resolve: {
 				user: function(UserModel, $user) {
 					var user = $user.getCurrentUser();
-					return UserModel.find(user.uid);
+					return UserModel.init().reset().find(user.uid);
 				}
 			}
 		})
