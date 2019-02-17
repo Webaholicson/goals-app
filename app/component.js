@@ -5,10 +5,10 @@
  * @return	{Object}  	GoalTracker component object 
  */
 define(['app/controller'], function(Controller) {
-	'use strict';
-	
-	return  {
-		templateUrl: 'app/template.html',
-		controller: Controller
-	}
+    'use strict';
+    
+    return  {
+        templateUrl: 'app/template.html',
+        controller: Controller
+    }
 })

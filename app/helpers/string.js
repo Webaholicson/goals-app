@@ -1,17 +1,15 @@
 define(function() {
-	var StringHelper = function() {
-		return {
-			trim: function(value) {
-				return value.replace(/^\s+/, '').replace(/\s+$/, '');
-			},
-			
-			slugify: function(value) {
-				return this.trim(value)
-					.replace(/\s/g, '_')
-					.toLowerCase();
-			}
-		}
-	}
-	
-	return StringHelper;
+    var StringHelper = function() {
+        return {
+            trim: function(value) {
+                return _.trim(value);
+            },
+
+            slugify: function(value) {
+                return _.toLower(_.replace(_.trim(value), /\s/g, '_'));
+            }
+        }
+    }
+
+    return StringHelper;
 });

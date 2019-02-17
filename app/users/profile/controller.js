@@ -27,16 +27,16 @@ define(function(require) {
                 ctrl.model.set('email', $user.getCurrentUser().email);
             }
         }
-        
+
         ctrl.onUpdate = function(section) {
             ctrl.resultClass    = section.resultClass;
             ctrl.resultMsg      = section.resultMsg;
             ctrl.displayMsg     = section.displayMsg;
             $scope.$apply();
         }
-	}
-	
-	Controller.$inject = ['$scope', '$user', 'UserModel'];
-	
-	return Controller;
+    }
+
+    Controller.$inject = ['$scope', '$user', 'UserModel'];
+
+    return Controller;
 });

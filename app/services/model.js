@@ -1,6 +1,6 @@
 define(function() {
     'use strict';
-    
+
     function Model($firebase) {
         return {
             _singularName: '',
@@ -157,9 +157,9 @@ define(function() {
             },
         }
     }
-    
+
     Model.$inject = ['$firebase'];
-    
+
     return Model;
 });
 

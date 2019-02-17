@@ -1,16 +1,16 @@
 <div id="profile" class="row">
     <gt-card title="{{$ctrl.title}}">
-        
-        <div 
+
+        <div
             ng-class="$ctrl.resultClass" 
             ng-show="$ctrl.displayMsg" 
             ng-bind="$ctrl.resultMsg" 
             class="alert" role="alert"
         ></div>
-        
+
         <gt-user-info model=$ctrl.model on-update=$ctrl.onUpdate(section)></gt-user-info>
-        
+
         <gt-auth-info model=$ctrl.model on-update=$ctrl.onUpdate(section)></gt-auth-info>
-        
+
     </gt-card>
 </div>

@@ -7,6 +7,7 @@ define(function(require) {
     var Router              = require('angular-route');
     var Bootstrap           = require('bootstrap.min');
     var Config              = require('app/config');
+    var _                   = require('lodash.min');
 
     // Services
     var FirebaseSrvc        = require('app/services/firebase');

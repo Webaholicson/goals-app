@@ -18,41 +18,41 @@ define(function(require) {
             ctrl.fieldModels[field.fid] = field
         }
 
-		ctrl.save = function(form, $event) {
-			var btn = ng.element($event.target).button('loading');
-			
-			if (!form.$valid) {
-				btn.button('reset');
-				ng.forEach(ctrl.fieldModels, function(v) {
-					v.invalid = false;
-					v.msg = '';
-				});
-				
-				ng.forEach(form.$error, function(v, err) {
-					ng.forEach(v, function(field) {
-						ctrl.fieldModels[field.$name].invalidate(err);
-						return;
-					});
-				});
-				
-				return;
-			}
-            
-			ctrl.model.save(function() {
-				ctrl.resultClass	= 'alert-success';
-				ctrl.resultMsg		= 'Your profile has been updated.';
-				ctrl.displayMsg 	= true;
-                
+        ctrl.save = function(form, $event) {
+            var btn = ng.element($event.target).button('loading');
+
+            if (!form.$valid) {
+                btn.button('reset');
+                ng.forEach(ctrl.fieldModels, function(v) {
+                    v.invalid = false;
+                    v.msg = '';
+                });
+
+                ng.forEach(form.$error, function(v, err) {
+                    ng.forEach(v, function(field) {
+                        ctrl.fieldModels[field.$name].invalidate(err);
+                        return;
+                    });
+                });
+
+                return;
+            }
+
+            ctrl.model.save(function() {
+                ctrl.resultClass	= 'alert-success';
+                ctrl.resultMsg		= 'Your profile has been updated.';
+                ctrl.displayMsg 	= true;
+
                 ctrl.onUpdate({section: ctrl});
-				btn.button('reset');
-			}, function() {
+                btn.button('reset');
+            }, function() {
                 ctrl.onUpdate({section: ctrl});
-				btn.button('reset');
-			});
-		}
-	}
-	
-	Controller.$inject = ['$scope', '$user'];
-	
-	return Controller;
+                btn.button('reset');
+            });
+        }
+    }
+
+    Controller.$inject = ['$scope', '$user'];
+
+    return Controller;
 });

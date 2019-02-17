@@ -1,7 +1,7 @@
 define(function() {
-	'use strict';
-	
-	function UserModel(Model) {
+    'use strict';
+
+    function UserModel(Model) {
         return {
             init: function() {
                 Model.init('User', 'users', {
@@ -18,9 +18,9 @@ define(function() {
                 return Model;
             }
         }
-	}
+    }
 
-	UserModel.$inject = ['$model'];
+    UserModel.$inject = ['$model'];
 
-	return UserModel;
+    return UserModel;
 })

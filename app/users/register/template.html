@@ -1,29 +1,29 @@
 <div id="register" class="row">
-	<form novalidate name="register_form" class="col-xs-12">
-		<h4>
+    <form novalidate name="register_form" class="col-xs-12">
+        <h4>
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
             Register
         </h4>
-		<hr/>
-		
-		<div 
+        <hr/>
+
+        <div 
             ng-class="$ctrl.registerClass" 
             ng-show="$ctrl.displayMsg" 
             ng-bind="$ctrl.registerMsg" 
             class="alert" 
             role="alert">
         </div>
-		
-		<gt-field 
-			ng-repeat="(fid, field) in $ctrl.fields" 
-			fid="fid" 
-			options="field"
-			model="$ctrl.model"
-			on-init-field="$ctrl.addField(fieldModel)"
-		></gt-field>
-		
-		<div class="form-group text-center">
-			<button 
+
+        <gt-field 
+            ng-repeat="(fid, field) in $ctrl.fields" 
+            fid="fid" 
+            options="field"
+            model="$ctrl.model"
+            on-init-field="$ctrl.addField(fieldModel)"
+        ></gt-field>
+
+        <div class="form-group text-center">
+            <button 
                 name="sbmt" 
                 type="submit" 
                 data-loading-text="Saving..." 
@@ -31,10 +31,10 @@
                 ng-click="$ctrl.register(register_form, $event)">
                 Submit
             </button>
-		</div>
-		
-		<div class="form-group text-center">
-			<p><a href="/login">Login</a></p>
-		</div>
-	</form>
+        </div>
+
+        <div class="form-group text-center">
+            <p><a href="/login">Login</a></p>
+        </div>
+    </form>
 </div>

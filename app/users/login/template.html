@@ -1,11 +1,11 @@
 <div id="login" class="row">
-	<form name="login_form" class="col-xs-12">
-		<h4>
+    <form name="login_form" class="col-xs-12">
+        <h4>
             <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 
             Login
         </h4>
-		<hr/>
-        
+        <hr/>
+
         <div 
             ng-class="$ctrl.resultClass" 
             ng-show="$ctrl.displayMsg" 
@@ -13,17 +13,17 @@
             class="alert" 
             role="alert">
         </div>
-		
+
         <gt-field 
-			ng-repeat="(fid, field) in $ctrl.fields" 
-			fid="fid" 
-			options="field"
-			model="$ctrl.model"
-			on-init-field="$ctrl.addField(fieldModel)"
-		></gt-field>
-        
-		<div class="form-group text-center">
-			<button 
+            ng-repeat="(fid, field) in $ctrl.fields" 
+            fid="fid" 
+            options="field"
+            model="$ctrl.model"
+            on-init-field="$ctrl.addField(fieldModel)"
+        ></gt-field>
+
+        <div class="form-group text-center">
+            <button 
                 name="sbmt" 
                 type="submit" 
                 data-loading-text="Authenticating..." 
@@ -31,10 +31,10 @@
                 ng-click="$ctrl.authenticate(login_form, $event)">
                 Submit
             </button>
-		</div>
-		<div class="form-group text-center">
-			<p><a href="/register">Register</a></p>
-			<p><a href="/forgot-password">Forgot password?</a></p>
-		</div>
-	</form>
+        </div>
+        <div class="form-group text-center">
+            <p><a href="/register">Register</a></p>
+            <p><a href="/forgot-password">Forgot password?</a></p>
+        </div>
+    </form>
 </div>

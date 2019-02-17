@@ -17,7 +17,7 @@ define(function(require) {
         ctrl.addField = function(field) {
             ctrl.fieldModels[field.fid] = field
         }
-		
+
         ctrl.save = function(form, $event) {
             var btn = ng.element(event.target).button('loading');
 
@@ -44,7 +44,7 @@ define(function(require) {
 
                 return;
             }
-            
+
             $user.authenticate(
                 form.email.$modelValue, 
                 form.current_password.$modelValue
@@ -54,14 +54,14 @@ define(function(require) {
                         ctrl.resultClass	= 'alert-success';
                         ctrl.resultMsg		= 'Your credentials has been updated.';
                         ctrl.displayMsg 	= true;
-                        
+
                         ctrl.onUpdate({section: ctrl});
                         btn.button('reset');
                     }).catch(function(error) {
                         ctrl.resultClass	= 'alert-danger';
                         ctrl.resultMsg		= error.message;
                         ctrl.displayMsg 	= true;
-                        
+
                         ctrl.onUpdate({section: ctrl});
                         btn.button('reset');
                     });
@@ -69,14 +69,14 @@ define(function(require) {
                 ctrl.resultClass	= 'alert-danger';
                 ctrl.resultMsg		= error.message;
                 ctrl.displayMsg 	= true;
-                
+
                 ctrl.onUpdate({section: ctrl});
                 btn.button('reset');
             });
         }
     }
-	
-	Controller.$inject = ['$scope', '$user', '$firebase'];
-	
-	return Controller;
+
+    Controller.$inject = ['$scope', '$user', '$firebase'];
+
+    return Controller;
 });
