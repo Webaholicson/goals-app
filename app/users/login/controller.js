@@ -16,7 +16,7 @@ define(function(require) {
 
         ctrl.fieldModels = {};
 
-        ctrl.model = UserModel;
+        ctrl.model = UserModel.init();
 
         ctrl.fields = new FieldList();
 

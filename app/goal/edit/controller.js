@@ -28,8 +28,9 @@ define(function(require) {
         };
 
         ctrl.$onInit = function() {
-
+            console.log(ctrl);
             if (ctrl.goal && ctrl.goal.path) {
+                console.log('hello 2');
                 ctrl.goal.once('value').then(function(goal) {
                     ctrl.title = 'Edit Goal: ' + goal.title;
                     ctrl.model.set(goal.val());
@@ -41,6 +42,9 @@ define(function(require) {
 
                 return;
             }
+
+            console.log('hello');
+            // ctrl.model.reset();
         }
 
         ctrl.$doCheck = function() {
@@ -78,7 +82,7 @@ define(function(require) {
             }
 
             if (!ctrl.model.get('id')) {
-                ctrl.model.set('id', $string.slugify(ctrl.model.get('title')));
+                ctrl.model.set('slug', $string.slugify(ctrl.model.get('title')));
                 ctrl.model.save(function() {
                     ctrl.goalSaved = true;
                     ctrl.goalMessage = 'Goal saved!';
@@ -97,9 +101,9 @@ define(function(require) {
     }
 
     Controller.$inject = [
-        '$location', 
-        '$string', 
-        '$scope',  
+        '$location',
+        '$string',
+        '$scope',
         'GoalModel'
     ];
 

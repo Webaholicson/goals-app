@@ -6,7 +6,7 @@ define(function() {
             },
 
             slugify: function(value) {
-                return _.toLower(_.replace(_.trim(value), /\s/g, '_'));
+                return _.toLower(_.replace(_.trim(value), /\s/g, '-'));
             }
         }
     }

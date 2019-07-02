@@ -1,11 +1,11 @@
 define(function() {
     'use strict';
 
-    function GoalModel(Model) {
+    function GoalModel(Model, $user) {
         return {
             init: function() {
-                Model.init('Goal', 'goals', {
-                    _fields: ['title', 'description']
+                Model.init('Goal', 'goals/'+$user.getCurrentUser().uid, {
+                    _fields: ['title', 'description', 'slug']
                 });
 
                 return Model;
@@ -13,7 +13,7 @@ define(function() {
         }
     }
 
-    GoalModel.$inject = ['$model'];
+    GoalModel.$inject = ['$model', '$user'];
 
     return GoalModel;
 })

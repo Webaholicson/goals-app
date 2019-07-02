@@ -17,7 +17,6 @@ require.config({
         'angular-route': {
             exports: 'ngRoute',
             deps: ['angular.min']
-            
         },
         'angular-animate': {
             exports: 'ngAnimate',
